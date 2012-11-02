@@ -1,0 +1,130 @@
+<cfsetting enablecfoutputonly="true" />
+
+<cfscript>
+    REQUEST.treeList = CreateObject("component", "com.cc.FileTree").GetSubordinates("CDG");
+</cfscript>
+
+<cfoutput>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+		<title>KLib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+        <link href="/assets/scripts/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/assets/css/default.css" rel="stylesheet">
+		<style>
+.tree {
+	list-style: none outside none;
+}
+.tree .caret {
+  margin-top: 8px;
+  margin-left: 2px;
+}
+.branch {
+  height: 0;
+  list-style: none outside none;
+  margin: 0 0 0 15px;
+  overflow: hidden;
+  postion: relative;
+}
+.branch.in {
+	height: auto;
+}
+a.tree-toggle {
+	display: inline-block;
+	padding-left: 20px;
+	height: 16px;
+    line-height: 16px;
+	background: url("/assets/css/treeview/icons.png") no-repeat;
+	background-position: 0 -16px;
+	vertical-align: middle;
+}
+a.tree-toggle.closed {
+	background-position: 0 -32px;
+}
+		</style>
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="##">Project name</a>
+                    <div class="nav-collapse collapse">
+                        <p class="navbar-text pull-right">
+                            Logged in as <a href="##" class="navbar-link">Username</a>
+                        </p>
+                        <ul class="nav">
+                            <li class="active"><a href="##">Home</a></li>
+                            <li><a href="##about">About</a></li>
+                            <li><a href="##contact">Contact</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="well css-treeview">
+                        <ul class="tree">
+		                    <li>
+		                      <a href="##" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_1">Dropdown <b class="caret"></b></a>
+		                      <ul class="branch">
+		                        <li><a tabindex="-1" href="http://google.com">Action</a></li>
+		                        <li>
+		                        	<a href="##" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_2">Dropdown <b class="caret"></b></a>
+									<ul class="branch">
+										<li><a href="##">Test This Stuff</a></li>
+										<li>You Never Know</li>
+										<li>Is This Really Where We're Headed?</li>
+										<li>
+											<a href="##" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_3">Dropdown <b class="caret"></b></a>
+											<ul class="branch">
+												<li>In Here</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+		                        <li><a tabindex="-1" href="##">Something else here</a></li>
+		                        <li class="divider"></li>
+		                        <li><a tabindex="-1" href="##">Separated link</a></li>
+		                      </ul>
+		                    </li>
+		                  </ul>
+                    </div><!--/.well -->
+                </div><!--/span-->
+                <div class="span9" id="mainContent">
+                    <div class="row-fluid">
+                        <div class="well affix span8" id="editorArea">
+                            <h1>Hello, world!</h1>
+                            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                            <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!---<cfdump var="#REQUEST.treeList#" />--->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+        <script src="/assets/scripts/bootstrap/js/bootstrap.js"></script>
+		<script src="/assets/scripts/bootstrap/js/bootstrap.tree.js"></script>
+    </body>
+</html>
+</cfoutput>
+
+<cfsetting enablecfoutputonly="false" />
