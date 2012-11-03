@@ -8,27 +8,29 @@
  *
  * Designed and built with all the love in the world by @cutterbl.
  */
-.tree, .branch {
-    list-style: none outside none;
+ 
+.tree,
+.branch {
+  list-style: none outside none;
 }
 .branch {
+  postion: relative;
   height: 0;
   margin: 0 0 0 15px;
   overflow: hidden;
-  postion: relative;
 }
 .branch.in {
-    height: auto;
+  height: auto;
 }
 a.tree-toggle {
-    display: inline-block;
-    padding-left: 20px;
-    height: 16px;
-    line-height: 16px;
-    background: url("../img/bstree-halflings.png") no-repeat;
-    background-position: 0 -22px;
-    vertical-align: middle;
+  height: 16px;
+  padding-left: 20px;
+  line-height: 16px;
+  vertical-align: middle;
+  display: inline-block;
+  background: url("../img/bstree-halflings.png") no-repeat;
+  background-position: 0 -22px;
 }
 a.tree-toggle.closed {
-    background-position: 0 1px;
+  background-position: 0 1px;
 }

@@ -24,100 +24,128 @@
 
   "use strict"; // jshint ;_;
 
-
   /* TREE CLASS DEFINITION
    * ========================= */
 
   var Tree = function (element, options) {
-	  this.$element = $(element)
-	  this.$tree = this.$element.closest('.tree')
-	  this.parentage = GetParentage(this.$element)
-	  this.options = $.extend({}, $.fn.tree.defaults, options)
+    
+    this.$element = $(element)
+    this.$tree = this.$element.closest(".tree")
+    this.parentage = GetParentage(this.$element)
+    this.options = $.extend({}, $.fn.tree.defaults, options)
 
-	  if (this.options.parent) {
-	      this.$parent = $(this.options.parent)
-	  }
+    if (this.options.parent) {
+      this.$parent = $(this.options.parent)
+    }
 
-	  this.options.toggle && this.toggle()
+    this.options.toggle && this.toggle()
   }
 
-      Tree.prototype = {
+  Tree.prototype = {
 
-        constructor: Tree
-        
-        , toggle: function () {
-        	this.$parent[this.$element.hasClass('in') ? 'addClass' : 'removeClass']('closed')
-        	this.$element[this.$element.hasClass('in') ? 'removeClass' : 'addClass']('in')
-        }
+    constructor: Tree
+
+    , toggle: function () {
       
-      	, getparentage: function() {
-      		return this.parentage
-      	}
-      	
-      	, node: function () {
-      		var node = $.extend(true, {}, $(this.$parent).data())
-      		node.branch = this.$element
-      		return node
-      	}
-
-      }
+      var e, currentStatus = this.$element.hasClass("in")
+        , eventName = (!currentStatus) ? "opennode" : "closenode"
+          
+      this.$parent[currentStatus ? "addClass" : "removeClass"]("closed")
+      this.$element[currentStatus ? "removeClass' : "addClass"]("in")
       
-      var GetParentBranch = function ($this) {
-    	  return $this.closest('ul.branch').prev('.tree-toggle')
-      }
-      
-      var GetParentage = function ($this) {
-    	  var arr = [], tmp
-    	  tmp = GetParentBranch($this)
-    	  if (tmp.length) {
-    		  arr = GetParentage(tmp)
-    		  arr.push(tmp.attr('data-value'))
-    	  }
-    	  return arr
-      }
-
-
-     /* COLLAPSIBLE PLUGIN DEFINITION
-      * ============================== */
-
-      $.fn.tree = function (option) {
-          return this.each(function () {
-              var $this = $(this)
-                , data = $this.data('tree')
-                , options = typeof option == 'object' && option
-              if (!data) $this.data('tree', (data = new Tree(this, options)))
-              if (typeof option == 'string') data[option]()
-            })
-      }
-
-      $.fn.tree.defaults = {
-        toggle: true
-      }
-
-      $.fn.tree.Constructor = Tree
-
-     /* COLLAPSIBLE DATA-API
-      * ==================== */
-
-      $(function () {
-        $('body').on('click.tree.data-api', '[data-toggle=branch]', function (e) {
-          var $this = $(this), href
-            , $parent = $this.parent()
-            , target = $this.next('.branch')
-              || e.preventDefault()
-              || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
-            , option = $(target).data('tree') ? 'toggle' : $this.data()
-           option.parent = $this
-          $(target).tree(option)
-        })
-        $('body').on('click.tree.data-api', 'a:not([data-toggle=branch])', function (e) {
-          e.preventDefault()
-          var $this = $(this)
-          	, branch = $this.closest('.branch')
-          	, data = branch.data('tree')
-          //console.log(data['getparentage']())
-          //console.log(data['node']())
-        })
+      e = $.Event(eventName, {
+        node: this.node()
       })
+      
+      this.$parent.trigger(e)
+      
+    }
 
-    }(window.jQuery);
+    , getparentage: function() {
+      
+      return this.parentage
+      
+    }
+
+    , node: function () {
+      
+      var node = $.extend(true, {}, $(this.$parent).data())
+      
+      node.branch = this.$element
+      node.parentage = this.parentage
+      node.el = this.$parent
+      
+      delete node.parent
+      
+      return node
+      
+    }
+
+  }
+
+  var GetParentBranch = function ($this) {
+    
+    return $this.closest("ul.branch").prev(".tree-toggle")
+    
+  }
+
+  var GetParentage = function ($this) {
+    
+    var arr = [], tmp
+    
+    tmp = GetParentBranch($this)
+    if (tmp.length) {
+      arr = GetParentage(tmp)
+      arr.push(tmp.attr("data-value")||tmp.text())
+    }
+    
+    return arr
+    
+  }
+
+
+  /* COLLAPSIBLE PLUGIN DEFINITION
+   * ============================== */
+
+  $.fn.tree = function (option) {
+    
+    return this.each(function () {
+      var $this = $(this)
+        , data = $this.data("tree")
+        , options = typeof option == "object" && option
+        
+      if (!data) $this.data("tree", (data = new Tree(this, options)))
+      if (typeof option == "string") data[option]()
+    })
+    
+  }
+
+  $.fn.tree.defaults = {
+      
+    toggle: true
+    
+  }
+
+  $.fn.tree.Constructor = Tree
+
+  /* COLLAPSIBLE DATA-API
+   * ==================== */
+
+  $(function () {
+    $("body").on("click.tree.data-api", "[data-toggle=branch]", function (e) {
+      
+      var $this = $(this), href
+        , $parent = $this.parent()
+        , target = $this.next(".branch")
+        || e.preventDefault()
+        || (href = $this.attr("href")) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
+        , option = $(target).data("tree") ? "toggle" : $this.data()
+            
+      option.parent = $this
+      $(target).tree(option)
+      
+    })
+    
+  })
+
+}(window.jQuery);
