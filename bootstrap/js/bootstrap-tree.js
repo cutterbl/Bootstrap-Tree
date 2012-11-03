@@ -51,7 +51,7 @@
         , eventName = (!currentStatus) ? "opennode" : "closenode"
           
       this.$parent[currentStatus ? "addClass" : "removeClass"]("closed")
-      this.$element[currentStatus ? "removeClass' : "addClass"]("in")
+      this.$element[currentStatus ? "removeClass" : "addClass"]("in")
       
       e = $.Event(eventName, {
         node: this.node()
