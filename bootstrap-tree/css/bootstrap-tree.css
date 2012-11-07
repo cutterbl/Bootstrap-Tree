@@ -1,5 +1,5 @@
 /*!
- * Bootstrap Tree v0.1
+ * Bootstrap Tree v0.2
  *
  * Copyright 2012 Cutters Crossing
  * Bootstrap is Copyright 2012 Twitter, Inc.
@@ -22,6 +22,20 @@
 .branch.in {
   height: auto;
 }
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 a.tree-toggle {
   height: 16px;
   padding-left: 20px;

@@ -41,8 +41,12 @@ $(function () {
    */
   $("body").on("opennode.tree", "[data-toggle=branch]", function (e) {
     
-    console.log("opennode", e)
-    
+    if (console) {
+      console.log("opennode", e)
+    } else {
+      alert("Open Node Event")
+    }
+      
   })
   
   /**
@@ -51,8 +55,17 @@ $(function () {
    */
   $("body").on("closenode.tree", "[data-toggle=branch]", function (e) {
     
-    console.log("closenode", e)
+    if (console) {
+      console.log("closenode", e)
+    } else {
+      alert("Close Node Event")
+    }
     
   })
 
 })
+
+var cbExample = function (response, status, xhr) {
+  console.log("this ", this)
+  console.log("data", arguments)
+}

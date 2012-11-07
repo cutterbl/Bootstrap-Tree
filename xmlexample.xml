@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+  <node>
+    <text>this branch</text>
+    <id>root/number_8</id>
+    <cls>folder</cls>
+    <leaf></leaf>
+    <expanded></expanded>
+    <value>number_8</value>
+    <children>
+      <node>
+        <text>this leaf</text>
+        <id>root/number_8/Cutters_Crossing</id>
+        <href>http://www.cutterscrossing.com</href>
+        <leaf>1</leaf>
+        <value>Cutters_Crossing</value>
+      </node>
+    </children>
+  </node>
+  <node>
+    <text>that branch</text>
+    <id>root/number_9</id>
+    <cls>folder</cls>
+    <leaf></leaf>
+    <expanded></expanded>
+    <value>number_9</value>
+    <children>
+      <node>
+        <text>this other leaf</text>
+        <id>root/number_9/Cutters_Crossing</id>
+        <href>http://www.cutterscrossing.com</href>
+        <leaf>1</leaf>
+        <value>Cutters_Crossing</value>
+      </node>
+    </children>
+  </node>
+</nodes>

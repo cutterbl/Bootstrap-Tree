@@ -6,8 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta name="description" content="">
 	    <meta name="author" content="">
-        <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/bootstrap/css/bootstrap-tree.css" rel="stylesheet">
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="bootstrap-tree/css/bootstrap-tree.css" rel="stylesheet">
 		<style>
 body {
     padding-top: 60px;
@@ -17,10 +17,10 @@ body {
     padding: 9px 0;
 }
 		</style>
-        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -50,48 +50,38 @@ body {
             <div class="row-fluid">
                 <div class="span3">
                     <div class="well">
-                        <ul class="tree">
-		                    <li>
-		                      <a href="##" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_1">Branch 1</a>
-		                      <ul class="branch">
-		                        <li><a tabindex="-1" href="http://google.com">Action</a></li>
-		                        <li>
-		                        	<a href="#" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_2">Branch 2 (nested)</a>
-									<ul class="branch">
-										<li><a href="#">Test This Stuff</a></li>
-										<li>You Never Know</li>
-										<li>Is This Really Where We're Headed?</li>
-										<li>
-											<a href="#" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="number_3">Branch 3 (really nested)</a>
-											<ul class="branch">
-												<li>In Here</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-		                        <li><a tabindex="-1" href="#">Something else here</a></li>
-		                        <li class="divider"></li>
-		                        <li><a tabindex="-1" href="#">Separated link</a></li>
-		                      </ul>
-		                    </li>
-		                  </ul>
+                      <ul class="tree">
+                        <li>
+                          <a href="#" role="branch" class="tree-toggle" data-toggle="branch" data-value="Bootstrap_Tree">Bootstrap Tree</a>
+                          <ul class="branch in">
+                              <li><a href="#">Docs</a></li>
+                              <li><a href="#">Examples</a></li>
+                              <li><a href="#">Credits</a></li>
+                              <li><a href="http://www.cutterscrossing.com">Cutter's Crossing</a></li>
+                              <li><a href="http://twitter.github.com/bootstrap">Bootstrap</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="htmlexample.html" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="HTML_Example">HTML Ajax Example</a></li>
+                        <li><a href="xmlexample.xml" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="XML_Example">XML Ajax Example</a></li>
+                        <li><a href="jsonexample.json" role="branch" class="tree-toggle closed" data-toggle="branch" data-value="JSON_Example">JSON Ajax Example</a></li>
+                      </ul>
                     </div><!--/.well -->
-                </div><!--/span-->
-                <div class="span9" id="mainContent">
-                    <div class="row-fluid">
-                        <div class="well affix span8" id="editorArea">
-                            <h1>Bootstrap Tree</h1>
-                            <p>This is a template is a basic example of Bootstrap Tree. <a href="http://twitter.github.com/bootstrap/index.html">Bootstrap</a> is an excellent front-framework from the guys at Twitter. This simple component is an add on component for rendering a basic Tree with some HTML configuration.</p>
-							<p>Click a node, on the left, to see it in action.</p>
-                            <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
-                        </div>
-                    </div>
-                </div>
+                  </div><!--/span-->
+                  <div class="span9" id="mainContent">
+                      <div class="row-fluid">
+                          <div class="well affix span8" id="editorArea">
+                              <h1>Bootstrap Tree</h1>
+                              <p>This is a template is a basic example of Bootstrap Tree. <a href="http://twitter.github.com/bootstrap/index.html">Bootstrap</a> is an excellent front-end framework from the guys at Twitter. This simple component is an add on component for rendering a basic Tree with some HTML configuration.</p>
+  							<p>Click a node, on the left, to see it in action.</p>
+                              <!-- <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p> -->
+                          </div>
+                      </div>
+                  </div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/bootstrap/js/bootstrap-tree.js"></script>
-        <script src="/example.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="bootstrap-tree/js/bootstrap-tree.js"></script>
+        <script src="example.js"></script>
     </body>
 </html>
