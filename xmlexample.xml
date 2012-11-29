@@ -13,7 +13,7 @@
         <id>root/number_8/Cutters_Crossing</id>
         <href>http://www.cutterscrossing.com</href>
         <leaf>1</leaf>
-        <value>Cutters_Crossing</value>
+        <value>Cutters_Crossing_Link1</value>
       </node>
     </children>
   </node>
@@ -22,7 +22,7 @@
     <id>root/number_9</id>
     <cls>folder</cls>
     <leaf></leaf>
-    <expanded></expanded>
+    <expanded>true</expanded>
     <value>number_9</value>
     <children>
       <node>
@@ -30,8 +30,14 @@
         <id>root/number_9/Cutters_Crossing</id>
         <href>http://www.cutterscrossing.com</href>
         <leaf>1</leaf>
-        <value>Cutters_Crossing</value>
+        <value>Cutters_Crossing_Link2</value>
       </node>
     </children>
+  </node>
+  <node>
+    <text><![CDATA[this other leaf <b class="icon-leaf"></b>]]></text>
+    <id>root/number_9/Cutters_Crossing</id>
+    <leaf>1</leaf>
+    <value>Cutters_Crossing_Link3</value>
   </node>
 </nodes>

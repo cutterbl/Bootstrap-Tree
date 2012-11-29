@@ -1,5 +1,5 @@
 /* =============================================================
- * bootstrap-tree.js v0.2
+ * bootstrap-tree.js v0.3
  * http://twitter.github.com/cutterbl/Bootstrap-Tree
  * 
  * Inspired by Twitter Bootstrap, with credit to bits of code
@@ -49,8 +49,9 @@
 
     , toggle: function () {
       
-      var e, currentStatus = this.$element.hasClass("in")
-        , eventName = (!currentStatus) ? "opennode" : "closenode"
+      var a, n, s
+        , currentStatus = this.$element.hasClass("in")
+        , eventName = (!currentStatus) ? "openbranch" : "closebranch"
           
       this.$parent[currentStatus ? "addClass" : "removeClass"]("closed")
       this.$element[currentStatus ? "removeClass" : "addClass"]("in")
@@ -59,11 +60,17 @@
         this._load()
       }
       
-      e = $.Event(eventName, {
-        node: this.node()
+      n = this.node()
+      // 'Action' (open|close) event
+      a = $.Event(eventName, {
+        node: n
+      })
+      // 'Select' event
+      s = $.Event("nodeselect", {
+        node: n
       })
       
-      this.$parent.trigger(e)
+      this.$parent.trigger(a).trigger(s)
       
     }
 
@@ -142,12 +149,13 @@
           , role = (el.leaf) ? "leaf" : "branch"
           , attributes = {}
           , anchor = $("<a>")
-          
+        
+        attributes.role = role
+        
         if (!el.leaf) {
           
           var branch = $("<ul>").addClass("branch")
           
-          attributes.role = el.role
           attributes.class = "tree-toggle closed"
           attributes["data-toggle"] = "branch"
             
@@ -164,10 +172,19 @@
         }
         
         attributes.href = (el.href) ? el.href : "#"
+          
+        // trade the anchor for a span tag, if it's a leaf
+        // and there's no href
+        if (el.leaf && attributes.href === "#") {
+          
+          anchor = $("<span>")
+          delete attributes.href
+          
+        }
+        
         anchor.attr(attributes)
         
         if (el.cls) anchor.addClass(el.cls)
-          
         if (!el.leaf && el.expanded && el.children.length) {
           
           anchor.removeClass("closed")
@@ -271,13 +288,14 @@
       
     }
 
-    , node: function () {
+    , node: function (el) {
+      el = el || $(this)
       
-      var node = $.extend(true, {}, $(this.$parent).data())
+      var node = $.extend(true, {}, (el[0] === $(this)[0]) ? $(this.$parent).data() : el.data())
       
       node.branch = this.$element
       node.parentage = this.parentage
-      node.el = this.$parent
+      node.el = (el[0] === $(this)[0]) ? this.$parent : el
       
       delete node.parent
       
@@ -383,20 +401,58 @@
    * ==================== */
 
   $(function () {
+    
     $("body").on("click.tree.data-api", "[data-toggle=branch]", function (e) {
+      
       e.preventDefault()
-      var $this = $(this), href, option
-        , $parent = $this.parent()
+      
+      var $this = $(this)
         , target = $this.next(".branch")
-      href = $this.attr("href")
+        , href = $this.attr("href")
+        , option = $(target).data("tree") ? "toggle" : $this.data()
+        
       href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
+      
       if (!target.length) {
         target = $('<ul>').addClass('branch').append("<li>" + loading + "</li>").insertAfter($this)
       }
-      option = $(target).data("tree") ? "toggle" : $this.data()
+      
       option.parent = $this
       option.href = (href !== "#") ? href : undefined
+          
       $(target).tree(option)
+      
+      return false
+    })
+    
+    $("body").on("click.tree.data-api", "[role=leaf]", function (e) {
+      
+      var $this = $(this)
+        , branch = $this.closest(".branch")
+        
+      // If not initialized, then create it
+      if (!$(branch).data("tree")) {
+        
+        var $target = $(branch)
+          , branchlink = $target.prev("[data-toggle=branch]")
+          , branchdata = branchlink.data()
+          , href = branchlink.attr("href")
+        
+        href.replace(/.*(?=#[^\s]+$)/, '')
+        
+        $target.tree($.extend({}, branchdata, {
+          "toggle": false,
+          "parent": branchlink,
+          "href": (href !== "#") ? href : undefined
+        }))
+      }
+      
+      e = $.Event("nodeselect", {
+        node: $(branch).data("tree").node($this)
+      })
+      
+      $this.trigger(e)
+      
     })
     
   })
