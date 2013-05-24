@@ -8,7 +8,7 @@
  *
  * Designed and built with all the love in the world by @cutterbl.
  */
- 
+
 .tree,
 .branch {
   list-style: none outside none;
@@ -23,15 +23,15 @@
   height: auto;
 }
 
-a:link,
-a:visited,
-a:hover,
-a:active {
+.tree a:link,
+.tree a:visited,
+.tree a:hover,
+.tree a:active {
   color: #000;
   text-decoration: none;
 }
 
-a:hover {
+.tree a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
