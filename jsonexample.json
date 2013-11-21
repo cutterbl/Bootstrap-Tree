@@ -12,6 +12,1021 @@
     "value": "Cutters_Crossing",
     "id": "root\/number_8\/Cutters_Crossing",
     "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  }]
+}, {
+  "text": "that branch",
+  "leaf": "false",
+  "value": "number_9",
+  "expanded": true,
+  "id": "root\/number_9",
+  "children": [{
+    "text": "this leaf",
+    "leaf": true,
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_9\/Cutters_Crossing",
+    "checked": true
+  }]
+}, {
+  "text": "this leaf is not a link <b class=\"icon-leaf\"></b>",
+  "leaf": true,
+  "value": "Cutters_Crossing",
+  "id": "root\/number_9\/Cutters_Crossing",
+  "checked": true
+},{
+  "text": "this branch",
+  "leaf": false,
+  "value": "number_8",
+  "expanded": false,
+  "cls": "folder",
+  "id": "root\/number_8",
+  "children": [{
+    "text": "this leaf",
+    "leaf": "1",
+    "href": "http://cutterscrossing.com",
+    "value": "Cutters_Crossing",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
+  },{
+    "text": "this other branch",
+    "leaf": false,
+    "href": "jsonexample.json",
+    "value": "25",
+    "id": "root\/number_8\/Cutters_Crossing",
+    "checked": false
   }]
 }, {
   "text": "that branch",

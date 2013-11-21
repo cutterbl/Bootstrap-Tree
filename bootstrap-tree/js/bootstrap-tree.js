@@ -1,11 +1,11 @@
 /* =============================================================
- * bootstrap-tree.js v0.3
+ * bootstrap-tree.js v0.4
  * http://twitter.github.com/cutterbl/Bootstrap-Tree
  * 
  * Inspired by Twitter Bootstrap, with credit to bits of code
  * from all over.
  * =============================================================
- * Copyright 2012 Cutters Crossing.
+ * Copyright 2013 Cutters Crossing.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,191 +24,201 @@
 
   "use strict"; // jshint ;_;
 
-  var loading = "<img src='/bootstrap-tree/img/ajax-loader.gif' class='indicator' /> Loading ...";
-
-  /* TREE CLASS DEFINITION
+  /* BSTREE CLASS DEFINITION
    * ========================= */
-
-  var Tree = function (element, options) {
-    
-    this.$element = $(element)
-    this.$tree = this.$element.closest(".tree")
-    this.parentage = GetParentage(this.$element)
-    this.options = $.extend({}, $.fn.tree.defaults, options)
-
-    if (this.options.parent) {
-      this.$parent = $(this.options.parent)
-    }
-
-    this.options.toggle && this.toggle()
+  var BSTree = function (element, options) {
+    this.init('bstree', element, options)
   }
 
-  Tree.prototype = {
+  BSTree.prototype = {
 
-    constructor: Tree
+    constructor: BSTree
+    
+    , init: function (type, element, options) {
+        var el = this
+        
+        this.type = type
+        this.$element = $(element)
+        this.options = this.getOptions(options)
+        this.enabled = true
+        
+        this.checkLastNode()
+        
+        this.$element.on("click." + this.type + ".coll-icon", "li>i.bstree-icon", function (ev) {
+          var $this = $(this)
+              , $parent = $this.parent()
+              , data = $parent.data();
+          if (!$parent.hasClass("bstree-leaf")) {
 
-    , toggle: function () {
-      
-      var a, n, s
-        , currentStatus = this.$element.hasClass("in")
-        , eventName = (!currentStatus) ? "openbranch" : "closebranch"
-          
-      this.$parent[currentStatus ? "addClass" : "removeClass"]("closed")
-      this.$element[currentStatus ? "removeClass" : "addClass"]("in")
-      
-      if (this.options.href) {
-        this._load()
-      }
-      
-      n = this.node()
-      // 'Action' (open|close) event
-      a = $.Event(eventName, {
-        node: n
-      })
-      // 'Select' event
-      s = $.Event("nodeselect", {
-        node: n
-      })
-      
-      this.$parent.trigger(a).trigger(s)
-      
+            if (!$.isEmptyObject(data)) {
+
+              el.processNode($parent, data)
+            } else {
+              $parent.toggleClass("bstree-open bstree-closed")
+            }
+          }
+        }).on("mouseenter." + this.type, ".node-text mouseleave." + this.type, ".node-text", function (ev) {
+          $(this).toggleClass("bstree-hovered")
+        })
+        .on("change." + this.type + ".checkbox", "input[type=checkbox]", this, this._setNewState)
+        .on("click." + this.type + ".checkbox", ".bstree-checkbox", this, this._checkboxHandler)
+        
+        this._addIcons(element)
     }
-
-    , _load: function () {
-        var data = $.extend({}, this.options)
-          , el = this.$element
-          , $this = $(this)
-          , options = this.options
-
-        // some config data we don't need to pass in the post
-        delete data.parent
-        delete data.href
-        delete data.callback
-
-        $.post(options.href, data, function (d, s, x){
-          
-          var doc, type = "html"
-            
-          if (options.callback) { // If a callback was defined in the data parameters
-            
-            var cb = window[options.callback].apply(el, [d, s, x]) // callbacks must return an object with 'doc' and 'type' keys
-            doc = cb.doc || d
-            type = cb.type || type
-            
-          } else {
-            
-            try {
-              doc = $.parseJSON(d)
-              type = "json"
-            } catch (err) {
-              doc = d
-            }
-            
-            if (type !== "json") {
-              try {
-                doc = $.parseXML(d)
-                type = "xml"
-              } catch (err) {
-                doc = d
-              }
-            }
-            
-          }
-          
-          switch (type) {
-            
-            case "html":
-              el.html(doc)
-              break
-              
-            default:
-              $this[0]._buildOutput(doc, type, el)
-              break
-              
-          }
-          
-        }, "html")
+  
+    , _addIcons: function (el) {
+      var $el = $(el)
+          , $li = $("li:not(:has(>i.bstree-icon))", $el)
+          , treedata = this.options
+          , baseicon = $("<i>").addClass("bstree-icon")
+      
+      $li.prepend(baseicon)
+      
+      if (treedata.checkbox) {
+        $li.each(function (ind, item) {
+          var $item = $(item)
+              , data = $item.data()
+              , checked = (data.checked) ? data.checked : false
+              , thisicon = baseicon.clone()
+              , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: treedata.checkbox}).prop("checked", checked)
+              , node = $item.children("span.node-text")
+          thisicon.addClass("bstree-checkbox").addClass((checked) ? "bstree-checked" : "bstree-unchecked")
+          node.prepend(thisicon.after(fld))
+        })
+        $("li:last-child>span>input[type=checkbox]", $el).trigger("change", [true])
+      } else if (treedata.foldertree) {
+        var newicon = baseicon.clone()
+        $("span.node-text", $li).prepend(newicon)
+      }
+    }
+  
+    , getOptions: function (options) {
+      options = $.extend(true, {}, $.fn[this.type].defaults, this.$element.data(), options)
+  
+      return options
     }
     
-    , _buildOutput: function (doc, type, parent) {
+    , checkLastNode: function () {
+      var $el = this.$element
+      if ($("li:last-child", $el).css("background") !== "transparent") 
+        $("li:last-child", $el).addClass("bstree-last");
+    }
+    
+    , processNode: function ($node, data) {
+      data.loaded = (data.loaded !== undefined) ? data.loaded : false
+      data.reload = (data.reload !== undefined) ? data.reload : false
+      data.href = (data.href !== undefined) ? data.href : "";
       
-      var nodes = this._buildNodes(doc, type)
+      if ($node.hasClass("bstree-closed") && data.href.length) {
+        if (!data.loaded || data.reload) {
+          this.getRemoteData($node, data)
+          return
+        }
+      }
+      $node.toggleClass("bstree-closed bstree-open")
+    }
+    
+    , getRemoteData: function ($node, data) {
+      var el = this
+          , opts = $.extend(true, {}, this.options.params)
+          , rFns = {
+            complete: opts.request.complete,
+            error: opts.request.error,
+            success: opts.request.success
+          }
+          , rPrms = {}
+      rPrms = {
+        context: this,
+        success: function (d, s, x) {
+
+          this._buildOutput(d, opts.request.dataType, $node)
+          rFns.success(d, s, x)
+        },
+        error: rFns.error,
+        complete: rFns.complete,
+        data: $.extend(true, {}, data),
+        url: opts.base + data.href
+      }
       
-      parent.empty().append(this._createNodes(nodes))
+      delete opts.request.complete
+      delete opts.request.error
+      delete opts.request.success
+      delete rPrms.data.reload
+      delete rPrms.data.loaded
+      delete rPrms.data.href
       
+      rPrms = $.extend(true, opts.request, rPrms)
+      $node.children("i.bstree-icon").addClass("bstree-loading")
+
+      $.ajax(rPrms)
+    }
+    
+    , _buildOutput: function (d, type, parent) {
+      var nodes = this._buildNodes(d, type, parent)
+      parent.children("ul.bstree-branch").remove() // remove the old one, if replacing
+      var out = this._createNodes(nodes)
+      parent.append(out)
+      this._addIcons(out)
+      parent.data({loaded:true}).toggleClass("bstree-closed bstree-open").children("i.bstree-icon").removeClass("bstree-loading")
     }
     
     , _createNodes: function (nodes) {
       
       var els = []
-        , $this = $(this)
+        , $this = this
+        , branch = $("<ul>").addClass("bstree-branch")
+      
+
       
       $.each(nodes, function (ind, el) {
-        
         var node = $("<li>")
-          , role = (el.leaf) ? "leaf" : "branch"
-          , attributes = {}
-          , anchor = $("<a>")
-        
-        attributes.role = role
-        
-        if (!el.leaf) {
-          
-          var branch = $("<ul>").addClass("branch")
-          
-          attributes.class = "tree-toggle closed"
-          attributes["data-toggle"] = "branch"
-            
-        }
+            , role = ($this.$element.bstree.SetBoolean(el.leaf)) ? "leaf" : "branch"
+            , anchor = null
+            , attributes = {}
+
+        if (role === "leaf") 
+          attributes["class"] = "bstree-leaf"
+        else
+          attributes["class"] = (el.expanded) ? "bstree-open" : "bstree-closed"
         
         if (el.value) attributes["data-value"] = el.value
-          
+        
         if (el.id) attributes["data-itemid"] = el.id
         
         for (var key in el) { // do we have some extras?
-          
           if (key.indexOf("data-") !== -1) attributes[key] = el[key]
-          
         }
         
-        attributes.href = (el.href) ? el.href : "#"
-          
-        // trade the anchor for a span tag, if it's a leaf
-        // and there's no href
-        if (el.leaf && attributes.href === "#") {
-          
-          anchor = $("<span>")
-          delete attributes.href
-          
+        if ($this.options.checkbox !== undefined && $this.options.checkbox) {
+          attributes["data-checked"] = (el.checked !== undefined) ? $this.$element.bstree.SetBoolean(el.checked) : false
+          if (el.checkable !== undefined)
+            attributes["data-checkable"] = $this.$element.bstree.SetBoolean(el.checkable)
         }
         
-        anchor.attr(attributes)
-        
-        if (el.cls) anchor.addClass(el.cls)
-        if (!el.leaf && el.expanded && el.children.length) {
-          
-          anchor.removeClass("closed")
-          branch.addClass("in")
-          
+        if (el.href !== undefined) {
+          if (role === "leaf")
+            anchor = $("<a>").attr("href", el.href)
+          else
+            attributes["data-href"] = el.href
         }
         
-        anchor.html(el.text)
-        node.append(anchor)
-        
-        if (!el.leaf && el.children && el.children.length) {
-          
-          branch.append($this[0]._createNodes(el.children))
-          node.append(branch)
-          
+        var text = $("<span>").addClass("node-text")
+        if (anchor) {
+          text.append(anchor.html(el.text))
+        } else {
+          text.html(el.text)
         }
         
-        els.push(node)
+        node.attr(attributes).append(text)
         
+        if (el.children !== undefined && el.children.length)
+          node.append($this._createNodes(el.children))
+        
+        branch.append(node)
       })
       
-      return els
+      return branch
     }
-    
     , _buildNodes: function (doc, type) {
       
       var nodes = []
@@ -242,7 +252,7 @@
           var nodeVal = (item !== "children") ? el[item] : $this[0]._parseJsonNodes(el.children)
               
           if (!$.isArray(nodeVal)) nodeVal = $.trim(nodeVal)
-          if (nodeVal.length) opts[item] = ($.inArray(item, boolChkArr) > -1) ? SetBoolean(nodeVal) : nodeVal
+          if (nodeVal.length) opts[item] = ($.inArray(item, boolChkArr) > -1) ? $this.bstree.SetBoolean(nodeVal) : nodeVal
               
         }
         
@@ -302,55 +312,126 @@
       return node
       
     }
-
-  }
-  
-  var Node = function (options) {
     
-    $.extend(true, this, {
-      text: undefined,
-      leaf: false,
-      value: undefined,
-      expanded: false,
-      cls: undefined,
-      id: undefined,
-      href: undefined,
-      checkable: false,
-      checked: false,
-      children: []
-    }, options)
-    
-  }
-
-  var GetParentBranch = function ($this) {
-    
-    return $this.closest("ul.branch").prev(".tree-toggle")
-    
-  }
-
-  var GetParentage = function ($this) {
-    
-    var arr = [], tmp
-    
-    tmp = GetParentBranch($this)
-    if (tmp.length) {
-      arr = GetParentage(tmp)
-      arr.push(tmp.attr("data-value")||tmp.text())
+    , _checkboxHandler: function (ev) {
+      var $this = $(this)
+          , $parentLi = $this.closest("li")
+          , parentdata = $parentLi.data()
+          , cb = $this.next("input[type=checkbox]")
+          , ckd = cb.prop("checked")
+      $parentLi.data({checked: !ckd})
+      cb.prop("checked", !ckd).trigger("change", [ev.ctrlKey, !ckd])
     }
     
-    return arr
+    , _setNewState: function (ev, ctrlKey, checked) {
+
+      var $this = $(this)
+          , $parentLi = $this.closest("li")
+          , $leaves = $("ul li", $parentLi)
+          , checked = (checked) ? checked : $this.prop("checked")
+          , icn = $this.prev("i[class~=bstree-checkbox]")
+          , check = "checked"
+
+      icn.removeClass("bstree-checked bstree-unchecked bstree-undetermined")
+      if (!$leaves.length) {
+        icn.addClass("bstree-" + ((checked) ? check : "un" + check))
+      } else {
+        var leafCBs = $("input[type=checkbox]", $leaves)
+            , leafIcns = $("i[class~=bstree-checkbox]", $leaves)
+        if (!ctrlKey) {
+          icn.addClass("bstree-" + ((checked) ? check : "un" + check))
+          leafCBs.prop("checked", checked)
+          leafCBs.each(function (ind, el) {
+            var $Li = $(el).closest("li")
+                , leafdata = $Li.data()
+            if (leafdata.checked !== checked)
+              $Li.data({checked: checked})
+          })
+          leafIcns.removeClass("bstree-checked bstree-unchecked bstree-undetermined").addClass("bstree-" + ((checked) ? check : "un" + check))
+        } else {
+          var childSel = $.grep(leafCBs, function (el, ind) {
+            return $(el).prop("checked")
+          })
+          if (childSel.length)
+            icn.addClass("bstree-" + ((checked) ? check : "undetermined"))
+          else
+            icn.addClass("bstree-" + ((checked) ? check : "un" + check))
+        }
+      }
+      ev.data._checkParent($parentLi)
+    }
     
+    , _checkParent: function (node) {
+
+      var $parent = node.closest("ul").parent("li")
+          , span = $parent.children("span")
+          , childCBoxes = $("ul li>span>input:checkbox", $parent)
+          , chkdCBoxes = childCBoxes.filter(":checked")
+          , state = "checked"
+            
+      if (!$parent.length)
+        return
+        
+      if (!chkdCBoxes.length)
+        state = "unchecked"
+      else if (chkdCBoxes.length < childCBoxes.length)
+        state = "undetermined"
+          
+      var spanChildren = span.children("input:checkbox")
+          , ckd = (state === "checked") ? true : false
+      
+      spanChildren.prop("checked", ckd)
+      spanChildren.each(function (ind, el) {
+          var $Li = $(el).closest("li")
+              , leafdata = $Li.data()
+          if (leafdata.checked !== ckd)
+            $Li.data({checked: ckd})
+        })
+      $("i.bstree-checkbox", span).removeClass("bstree-checked bstree-unchecked bstree-undetermined").addClass("bstree-" + state)
+      this._checkParent($parent)
+    }
+
   }
   
-  /**
-   * FUNCTION SetBoolean
-   * 
-   * Takes any value, and returns it's boolean equivalent.
-   * 
-   * @param value (any)
-   * @return (boolean)
-   */
-  var SetBoolean = function (value) {
+  /* BSTREE PLUGIN DEFINITION
+   * ============================== */
+  $.fn.bstree = function (option, node) {
+    return this.each(function () {
+      var $this = $(this)
+        , data = $this.data('bstree')
+        , options = typeof option == 'object' && option
+      if (!data) $this.data('bstree', (data = new BSTree(this, options)))
+      if (typeof option == 'string') return data[option]()
+    })
+  }
+
+  $.fn.bstree.defaults = {
+      params: {
+        base: "",
+        request: {
+          dataType: "json",
+          type: "POST",
+          complete: $.noop,
+          error: $.noop,
+          success: $.noop
+        }
+      }
+  }
+  
+  $.fn.bstree.getSelected = function () {
+    var chkd = $("input:checkbox:checked", this.$element)
+        , sel = ""
+    
+    chkd.each(function (ind, el) {
+      if (sel.length)
+        sel += ","
+      sel += $(el).val()
+    })
+    
+    return sel
+  }
+  
+  $.fn.bstree.SetBoolean = function (value) {
     
     value = $.trim(value)
     
@@ -372,89 +453,23 @@
     return Boolean(value)
   }
 
-
-  /* COLLAPSIBLE PLUGIN DEFINITION
-   * ============================== */
-
-  $.fn.tree = function (option) {
+  $.fn.bstree.Constructor = BSTree
+  
+  var Node = function (options) {
     
-    return this.each(function () {
-      var $this = $(this)
-        , data = $this.data("tree")
-        , options = typeof option == "object" && option
-        
-      if (!data) $this.data("tree", (data = new Tree(this, options)))
-      if (typeof option == "string") data[option]()
-    })
-    
-  }
-
-  $.fn.tree.defaults = {
-      
-    toggle: true
+    $.extend(true, this, {
+      text: undefined,
+      leaf: false,
+      value: undefined,
+      expanded: false,
+      cls: undefined,
+      id: undefined,
+      href: undefined,
+      checkable: false,
+      checked: false,
+      children: []
+    }, options)
     
   }
-
-  $.fn.tree.Constructor = Tree
-
-  /* COLLAPSIBLE DATA-API
-   * ==================== */
-
-  $(function () {
-    
-    $("body").on("click.tree.data-api", "[data-toggle=branch]", function (e) {
-      
-      e.preventDefault()
-      
-      var $this = $(this)
-        , target = $this.next(".branch")
-        , href = $this.attr("href")
-        , option = $(target).data("tree") ? "toggle" : $this.data()
-        
-      href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
-      
-      if (!target.length) {
-        target = $('<ul>').addClass('branch').append("<li>" + loading + "</li>").insertAfter($this)
-      }
-      
-      option.parent = $this
-      option.href = (href !== "#") ? href : undefined
-          
-      $(target).tree(option)
-      
-      return false
-    })
-    
-    $("body").on("click.tree.data-api", "[role=leaf]", function (e) {
-      
-      var $this = $(this)
-        , branch = $this.closest(".branch")
-        
-      // If not initialized, then create it
-      if (!$(branch).data("tree")) {
-        
-        var $target = $(branch)
-          , branchlink = $target.prev("[data-toggle=branch]")
-          , branchdata = branchlink.data()
-          , href = branchlink.attr("href")
-        
-        href.replace(/.*(?=#[^\s]+$)/, '')
-        
-        $target.tree($.extend({}, branchdata, {
-          "toggle": false,
-          "parent": branchlink,
-          "href": (href !== "#") ? href : undefined
-        }))
-      }
-      
-      e = $.Event("nodeselect", {
-        node: $(branch).data("tree").node($this)
-      })
-      
-      $this.trigger(e)
-      
-    })
-    
-  })
-
-}(window.jQuery);
+  
+}(window.jQuery)
