@@ -5,7 +5,7 @@
  * Inspired by Twitter Bootstrap, with credit to bits of code
  * from all over.
  * =============================================================
- * Copyright 2013 Cutters Crossing.
+ * Copyright 2012 - 2013 Cutters Crossing.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
