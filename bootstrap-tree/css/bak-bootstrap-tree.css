@@ -1,0 +1,192 @@
+/*!
+ * Bootstrap Tree v0.4
+ *
+ * Copyright 2013 Cutters Crossing
+ * Bootstrap is Copyright 2012 Twitter, Inc.
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by @cutterbl.
+ */
+
+.bstree {
+  /*border: 1px solid black;*/
+  overflow-x: auto;
+  background-clip: padding-box;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  outline: medium none;
+}
+.bstree ul,
+.bstree li {
+  display:block;
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+
+.bstree li {
+  display:block;
+  min-height:18px;
+  line-height:18px;
+  white-space:nowrap;
+  margin-left:18px;
+  min-width:18px;
+}
+
+.bstree > ul > li {
+  margin-left:0;
+}
+
+.bstree i.bstree-icon {
+  display:inline-block;
+  text-decoration:none;
+  width:18px;
+  height:18px;
+  margin:0;
+  padding:0;
+}
+
+.bstree .node-text {
+  display:inline-block;
+  line-height:16px;
+  height:16px;
+  color:#000;
+  white-space:nowrap;
+  text-decoration:none;
+  padding: 0 2px 0 1px;
+  margin:0;
+}
+
+.bstree li.bstree-root-header>span.node-text {
+  display:block;
+  padding: 10px;
+  /*line-height:16px;
+  height:16px;
+  color:#000;
+  white-space:nowrap;
+  text-decoration:none;
+  padding: 0 2px 0 1px;
+  margin:0;*/
+}
+.bstree li.bstree-root-header.bstree-open>span.node-text {
+  border-bottom: 1px solid black;
+}
+.bstree li.bstree-root-header>span.node-text>i.bstree-header-icon {
+  position: relative;
+  float: right;
+}
+.bstree>ul>li.bstree-root-header.bstree-open>ul {
+  padding-bottom: 10px;
+}
+.bstree .node-text > i.bstree-icon {
+  height:16px;
+  width:16px;
+}
+
+.bstree .node-text > .bstree-icon {
+  margin-right:3px;
+}
+
+li.bstree-open > ul {
+  display:block;
+}
+
+li.bstree-closed > ul {
+  display:none;
+}
+
+.bstree .bstree-real-checkbox {
+  display:none;
+}
+
+
+.bstree li,
+.bstree i.bstree-icon {
+  background-image: url("/bootstrap-tree/img/d.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+.bstree li {
+  background-position: -90px 0;
+  background-repeat: repeat-y;
+}
+.bstree .bstree-root-header>span.node-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #999;
+}
+.bstree .bstree-open > i.bstree-icon {
+  background-position: -72px 0;
+}
+.bstree .bstree-closed > i.bstree-icon {
+  background-position: -54px 0;
+}
+.bstree .bstree-closed > i.bstree-loading {
+  background-image: url("/bootstrap-tree/img/ajax-loader.gif");
+  background-position: 0 0;
+}
+.bstree .bstree-leaf > i.bstree-icon {
+  background-position: -36px 0;
+}
+.bstree li:last-child,
+.bstree li.bstree-last {
+  background: transparent;
+}
+
+.bstree .bstree-hovered { 
+  background:#e7f4f9; 
+  border:1px solid #d8f0fa; 
+  padding:0 2px 0 1px; 
+}
+.bstree .bstree-clicked { 
+  background:#beebff; 
+  border:1px solid #99defd; 
+  padding:0 2px 0 1px; 
+}
+.bstree span.node-text .bstree-icon { 
+  padding-right:2px;
+}
+.bstree .bstree-closed>span.node-text .bstree-icon { 
+  background-position:-56px -18px; 
+}
+.bstree .bstree-open>span.node-text .bstree-icon {
+  background-position: -56px -36px;
+}
+.bstree .bstree-leaf>span.node-text .bstree-icon {
+  background-position: -74px -36px;
+}
+.bstree span.node-text .bstree-unchecked { 
+  background-position:-2px -18px !important; 
+}
+.bstree span.node-text .bstree-undetermined { 
+  background-position:-20px -18px !important; 
+}
+.bstree span.node-text .bstree-checked { 
+  background-position:-38px -18px !important; 
+}
+.bstree input[type=checkbox] {
+  display: none;
+}
+
+/* IE6 BEGIN */
+.bstree li, 
+.bstree i,
+.bstree .bstree-open i.bstree-icon { 
+  _background-position:-72px 0; 
+ }
+.bstree .bstree-closed i.bstree-icon { 
+  _background-position:-54px 0; 
+ }
+.bstree .bstree-leaf i.bstree-icon { 
+  _background-position:-36px 0; 
+}
+.bstree-default span.node-text .bstree-icon { 
+  _background-position:-56px -18px; 
+}
+.bstree-default .bstree-undetermined span.node-text .bstree-checkbox { _background-position:-20px -18px; }
+.bstree-default .bstree-checked span.node-text .bstree-checkbox { _background-position:-38px -18px; }
+.bstree-default .bstree-unchecked span.node-text .bstree-checkbox { _background-position:-2px -18px; }
+/* IE6 END */

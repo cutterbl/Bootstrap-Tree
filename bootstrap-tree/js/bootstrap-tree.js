@@ -57,6 +57,20 @@
               $parent.toggleClass("bstree-open bstree-closed")
             }
           }
+        }).on("click." + this.type + ".coll-icon", "li>span.node-text>i.bstree-header-icon", function (ev) {
+          var $this = $(this)
+              , $parent = $this.parent().parent()
+              , data = $parent.data();
+          if (!$parent.hasClass("bstree-leaf")) {
+
+            if (!$.isEmptyObject(data)) {
+
+              el.processNode($parent, data)
+            } else {
+              $parent.toggleClass("bstree-open bstree-closed")
+              $this.toggleClass("icon-chevron-right icon-chevron-down")
+            }
+          }
         }).on("mouseenter." + this.type, ".node-text mouseleave." + this.type, ".node-text", function (ev) {
           $(this).toggleClass("bstree-hovered")
         })
@@ -89,6 +103,12 @@
       } else if (treedata.foldertree) {
         var newicon = baseicon.clone()
         $("span.node-text", $li).prepend(newicon)
+      }
+      
+      var $first = $li.filter(":first")
+      if ($first.hasClass("bstree-root-header")) {
+        $first.children("i.bstree-icon").remove()
+        $first.children("span.node-text").prepend($("<i>").addClass("bstree-header-icon " + (($first.hasClass("bstree-closed")) ? "icon-chevron-right": "icon-chevron-down")))
       }
     }
   
