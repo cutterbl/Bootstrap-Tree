@@ -97,7 +97,7 @@
               , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: treedata.checkbox}).prop("checked", checked)
               , node = $item.children("span.node-text")
           thisicon.addClass("bstree-checkbox").addClass((checked) ? "bstree-checked" : "bstree-unchecked")
-          node.prepend(thisicon.after(fld))
+          node.prepend(fld).prepend(thisicon)
         })
         $("li:last-child>span>input[type=checkbox]", $el).trigger("change", [true])
       } else if (treedata.foldertree) {
