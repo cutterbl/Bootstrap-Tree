@@ -93,7 +93,7 @@
           var $item = $(item)
               , data = $item.data()
               , thisicon = baseicon.clone()
-              , node = $item.children("span.node-text")end(fld).prepend(thisicon)
+              , node = $item.children("span.node-text")
           if (data.checked !== undefined && data.checked !== "none") {
             var fldName = (data.checkbox !== undefined) ? data.checkbox : treedata.checkbox
                 , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: fldName}).prop("checked", data.checked)
