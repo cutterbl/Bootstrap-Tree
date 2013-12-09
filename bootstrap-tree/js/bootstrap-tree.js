@@ -102,7 +102,7 @@
             var fldName = (data.checkbox !== undefined) ? data.checkbox : treedata.checkbox
                 , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: fldName}).prop("checked", data.checked)
             thisicon.addClass("bstree-checkbox").addClass((data.checked) ? "bstree-checked" : "bstree-unchecked")
-            node.prepend(thisicon.after(fld))
+            node.prepend(fld).prepend(thisicon)
           } else {
             $item.addClass("bstree-noicon")
           }
