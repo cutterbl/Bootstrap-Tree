@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="bootstrap-tree/css/bootstrap-tree.css" rel="stylesheet">
+        <link href="bootstrap-tree/css/extra.css" rel="stylesheet">
         <style>
           body {
               padding-top: 60px;
@@ -75,7 +75,7 @@
                       </ul>
                     </div><!--/.well -->
                     <p></p>
-                    <div class="well bstree" data-foldertree="true">
+                    <div class="bstree" data-foldertree="true">
                       <ul>
                         <li class="bstree-open"><span class="node-text">This is my text</span>
                           <ul>
@@ -101,13 +101,13 @@
                       </ul>
                     </div><!--/.well -->
                     <p></p>
-                    <div class="bstree" data-checkbox="checkfield">
+                    <div class="bstree bstree-box" data-checkbox="checkfield">
                       <ul>
-                        <li class="bstree-open bstree-root-header" data-checked="false" data-value="22"><span class="node-text">This Is My Header</span>
+                        <li class="bstree-open bstree-root-header"><span class="node-text">This Is My Header</span>
                           <ul>
                             <li class="bstree-open" data-checked="false" data-value="25"><span class="node-text">This is my text</span>
                               <ul>
-                                <li class="bstree-leaf" data-checked="true" data-value="26"><span class="node-text">This is my first leaf</span></li>
+                                <li class="bstree-leaf" data-checked="true" data-value="26" data-checkbox="otherfield"><span class="node-text">This is my first leaf</span></li>
                                 <li class="bstree-closed" data-checked="false" data-value="27"><span class="node-text">This is my second leaf</span>
                                   <ul>
                                     <li class="bstree-leaf" data-checked="false" data-value="28"><span class="node-text">This is my first leaf</span></li>
@@ -115,7 +115,7 @@
                                     <li class="bstree-closed" data-reload="true" data-loaded="false" data-href="jsonexample.json" data-value="45"><span class="node-text">This is my third leaf</span></li>
                                   </ul>
                                 </li>
-                                <li class="bstree-leaf" data-checked="false" data-value="31"><span class="node-text">This is my third leaf</span></li>
+                                <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
                               </ul>
                             </li>
                             <li class="bstree-closed" data-remote="false" data-type="json" data-nodeid="12" data-checked="false" data-value="32"><span class="node-text">This is my next branch</span>

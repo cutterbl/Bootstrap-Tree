@@ -92,12 +92,16 @@
         $li.each(function (ind, item) {
           var $item = $(item)
               , data = $item.data()
-              , checked = (data.checked) ? data.checked : false
               , thisicon = baseicon.clone()
-              , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: treedata.checkbox}).prop("checked", checked)
-              , node = $item.children("span.node-text")
-          thisicon.addClass("bstree-checkbox").addClass((checked) ? "bstree-checked" : "bstree-unchecked")
-          node.prepend(fld).prepend(thisicon)
+              , node = $item.children("span.node-text")end(fld).prepend(thisicon)
+          if (data.checked !== undefined && data.checked !== "none") {
+            var fldName = (data.checkbox !== undefined) ? data.checkbox : treedata.checkbox
+                , fld = $("<input>").attr({type: "checkbox", value: ((data.value) ? data.value : 0), name: fldName}).prop("checked", data.checked)
+            thisicon.addClass("bstree-checkbox").addClass((data.checked) ? "bstree-checked" : "bstree-unchecked")
+            node.prepend(thisicon.after(fld))
+          } else {
+            $item.addClass("bstree-noicon")
+          }
         })
         $("li:last-child>span>input[type=checkbox]", $el).trigger("change", [true])
       } else if (treedata.foldertree) {
@@ -210,7 +214,8 @@
         }
         
         if ($this.options.checkbox !== undefined && $this.options.checkbox) {
-          attributes["data-checked"] = (el.checked !== undefined) ? $this.$element.bstree.SetBoolean(el.checked) : false
+          console.log(el.checked)
+          attributes["data-checked"] = (el.checked !== undefined && el.checked !== "none") ? $this.$element.bstree.SetBoolean(el.checked) : "none"
           if (el.checkable !== undefined)
             attributes["data-checkable"] = $this.$element.bstree.SetBoolean(el.checkable)
         }
@@ -486,7 +491,7 @@
       id: undefined,
       href: undefined,
       checkable: false,
-      checked: false,
+      checked: "none",
       children: []
     }, options)
     
