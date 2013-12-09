@@ -23,6 +23,10 @@
 !function ($) {
 
   "use strict"; // jshint ;_;
+  
+  if (typeof $.fn.bstree != "undefined") {
+	  return
+  }
 
   /* BSTREE CLASS DEFINITION
    * ========================= */
