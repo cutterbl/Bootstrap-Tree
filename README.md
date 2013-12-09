@@ -15,6 +15,11 @@ Bootstrap Tree &copy; 2012 - 2013 Cutters Crossing
 
 http://twitter.github.com/bootstrap
 
-Both are licensed under the Apache License, Version 2.0 (the "License")
+Bootstrap is licensed under the Apache License, Version 2.0 (the "License")
 
 http://www.apache.org/licenses/LICENSE-2.0
+
+Bootstrap Tree is licensed under the GNU GPL v2. This is a change to the Bootstrap Tree licensing, so
+please make yourself familiar with the differences, by reviewing the License.txt file in the /bootstrap-tree
+directory. Basically it says, if you use it you must include a copy of the license, and, if you modify it,
+then your modifications must be under the same open licensing.
