@@ -430,7 +430,7 @@
         , data = $this.data('bstree')
         , options = typeof option == 'object' && option
       if (!data) $this.data('bstree', (data = new BSTree(this, options)))
-      if (typeof option == 'string') return data[option]()
+      if (typeof option == 'string') return data[option](node)
     })
   }
 
