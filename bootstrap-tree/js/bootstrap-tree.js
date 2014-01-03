@@ -417,6 +417,8 @@
             $Li.data({checked: ckd})
         })
       $("i.bstree-checkbox", span).removeClass("bstree-checked bstree-unchecked bstree-undetermined").addClass("bstree-" + state)
+      // Do we open, or close the branch?
+      $parent.removeClass("bstree-closed bstree-open").addClass((state === "unchecked") ? "bstree-closed" : "bstree-open")
       this._checkParent($parent)
     }
 
