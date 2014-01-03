@@ -156,7 +156,7 @@
           
           var branch = $("<ul>").addClass("branch")
           
-          attributes.class = "tree-toggle closed"
+          attributes["class"] = "tree-toggle closed"
           attributes["data-toggle"] = "branch"
             
         }
