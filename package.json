@@ -1,0 +1,40 @@
+{
+  "name": "cc-bootstrap-tree",
+  "version": "0.0.5",
+  "description": "A heirarchical tree view built for use with Twitter Bootstrap 3.3.7.",
+  "main": "dist/cc-bootstrap-tree.min.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.babel.js",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cutterbl/Bootstrap-Tree.git"
+  },
+  "keywords": [
+    "tree",
+    "heirarchical",
+    "heirarchy",
+    "bootstrap",
+    "jquery"
+  ],
+  "author": "Steve 'Cutter' Blades",
+  "license": "LGPL-2.1",
+  "bugs": {
+    "url": "https://github.com/cutterbl/Bootstrap-Tree/issues"
+  },
+  "homepage": "https://github.com/cutterbl/Bootstrap-Tree#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "bootstrap": "3.3.7",
+    "bootstrap-sass": "3.3.7",
+    "eslint": "^4.15.0",
+    "eslint-loader": "^1.9.0",
+    "jasmine": "^2.8.0",
+    "jasmine-es6": "^0.4.3",
+    "jquery": "3.2.1",
+    "webpack": "^3.10.0"
+  }
+}
