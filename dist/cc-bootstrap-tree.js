@@ -73,6 +73,14 @@ module.exports = jQuery;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(2);
+module.exports = __webpack_require__(6);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 
@@ -84,11 +92,33 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _BSTree = __webpack_require__(2);
+var _BSTree = __webpack_require__(3);
 
 var _BSTree2 = _interopRequireDefault(_BSTree);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* =============================================================
+ * bootstrap-tree.js v0.5
+ * http://github.com/cutterbl/Bootstrap-Tree
+ *
+ * Inspired by Twitter Bootstrap, with credit to bits of code
+ * from all over.
+ * =============================================================
+ * Copyright 2012 - 2018 Cutters Crossing.
+ *
+ * Licensed under the GNU General Public License v2
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ ** http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
 
 (function ($) {
     if (typeof $ === 'undefined') {
@@ -110,7 +140,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _BSTree2.default;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -122,13 +152,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* =============================================================
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * bootstrap-tree.js v0.5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://github.com/cutterbl/Bootstrap-Tree
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Inspired by Twitter Bootstrap, with credit to bits of code
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * from all over.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * =============================================================
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2012 - 2018 Cutters Crossing.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the GNU General Public License v2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * you may not use this file except in compliance with the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ** http://www.gnu.org/licenses/gpl-2.0.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * limitations under the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * ============================================================ */
 
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _BSTreeNode = __webpack_require__(3);
+var _BSTreeNode = __webpack_require__(4);
 
 var _BSTreeNode2 = _interopRequireDefault(_BSTreeNode);
 
@@ -136,7 +186,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var BSTree = function ($) {
+var BSTree = function ($, BSTreeNode) {
 
     /**
      * ----------------------------------------------------------------------
@@ -187,8 +237,8 @@ var BSTree = function ($) {
         TREE_HOVERED: NAME + '-hovered',
         TREE_UNCHECKED: NAME + '-unchecked',
         TREE_UNDETERMINED: NAME + '-undetermined',
-        TOGGLE_RIGHT: 'icon-chevron-right',
-        TOGGLE_DOWN: 'icon-chevron-down',
+        TOGGLE_RIGHT: 'glyphicon-chevron-right',
+        TOGGLE_DOWN: 'glyphicon-chevron-down',
         NODE_TEXT: 'node-text'
     };
 
@@ -277,7 +327,7 @@ var BSTree = function ($) {
                     if (!$.isEmptyObject(data)) {
                         this.processNode($this, $parent, data);
                     } else {
-                        $parent.toggleClass(ClassName.TREE_OPEN + ' ' + ClassName.TREE_CLOSED);
+                        $parent.parent().toggleClass(ClassName.TREE_OPEN + ' ' + ClassName.TREE_CLOSED);
                         $this.toggleClass(ClassName.TOGGLE_RIGHT + ' ' + ClassName.TOGGLE_DOWN);
                     }
                 }
@@ -426,7 +476,7 @@ var BSTree = function ($) {
 
                 return $.ajax(requestParams).done(function (data, status, xhr) {
                     _this2.buildOutput(data, $parent);
-                    return _this2.options.params.success(data, status, xhr);
+                    return _this2.options.params.request.success(data, status, xhr);
                 }).fail(this.options.params.request.error).always(function (data, status) {
                     $children.removeClass(ClassName.TREE_LOADING);
                     return _this2.options.params.request.complete(data, status);
@@ -435,117 +485,114 @@ var BSTree = function ($) {
         }, {
             key: 'buildOutput',
             value: function buildOutput(data, $parent) {
-                var nodes = this.buildNodes(data);
+                if (data && Array.isArray(data) && data.length) {
+                    $parent.children('ul.' + ClassName.TREE_BRANCH).remove(); // remove the old one, if replacing
 
-                $parent.children('ul.' + ClassName.TREE_BRANCH).remove(); // remove the old one, if replacing
+                    var $branch = this.createNodes(data);
 
-                var output = this.createNodes(nodes);
-
-                $parent.append(output);
-                this.addIcons(output);
-                $parent.data('loaded', true).toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
+                    $parent.append($branch);
+                    this.addIcons($branch);
+                    $parent.data('loaded', true);
+                }
             }
         }, {
-            key: 'buildNodes',
-            value: function buildNodes(data) {
+            key: 'createNodes',
+            value: function createNodes(nodes) {
                 var _this3 = this;
 
-                return data.map(function (node) {
-                    var nodeOptions = _this3.buildNode(node);
+                var $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
 
-                    return new _BSTreeNode2.default(nodeOptions);
+                nodes.forEach(function (treeNode) {
+                    var node = new BSTreeNode(treeNode, _this3.options);
+                    var $node = node.element;
+                    $branch.append($node);
+                });
+
+                return $branch;
+            }
+
+            /*buildOutput(data, $parent) {
+                const nodes = this.buildNodes(data);
+                 $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
+                 const output = this.createNodes(nodes);
+                 $parent.append(output);
+                this.addIcons(output);
+                $parent.data('loaded', true)
+                    .toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
+            }
+             buildNodes(data) {
+                return data.map((node) => {
+                    const nodeOptions = this.buildNode(node);
+                     return new BSTreeNode(nodeOptions);
                 });
             }
-        }, {
-            key: 'buildNode',
-            value: function buildNode(node) {
-                var options = {};
-
-                for (var key in node) {
-                    var keyValue = key !== 'children' ? node[key] : this.buildNodes(node.children);
-
-                    if (!Array.isArray(keyValue)) {
-                        keyValue = keyValue.trim();
+             buildNode(node) {
+                const options = {};
+                 for (let key in node) {
+                    let keyValue = key !== 'children' ? node[key] : this.buildNodes(node.children);
+                     if (!Array.isArray(keyValue)) {
+                        keyValue = $.trim(keyValue);
                     }
                     if (keyValue.length) {
-                        options[key] = ['leaf', 'expanded', 'checkable', 'checked'].includes(key) ? this.setBoolean(keyValue) : keyValue;
+                        options[key] = ['leaf', 'expanded', 'checkable', 'checked'].includes(key)
+                            ? setBoolean(keyValue) : keyValue;
                     }
                 }
-
-                return options;
+                 return options;
             }
-        }, {
-            key: 'createNode',
-            value: function createNode(treeNode) {
-                var node = $('<li>');
-                var role = this.setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
-                var attributes = {};
-                var anchor = null;
-
-                if (role === 'leaf') {
+             createNode(treeNode) {
+                const node = $('<li>');
+                const role = setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
+                const attributes = {};
+                let anchor = null;
+                 if (role === 'leaf') {
                     attributes['class'] = ClassName.TREE_LEAF;
                 } else {
                     attributes['class'] = treeNode.expanded ? ClassName.TREE_OPEN : ClassName.TREE_CLOSED;
                 }
-
-                if (treeNode.value !== undefined) {
+                 if (treeNode.value !== undefined) {
                     attributes['data-value'] = treeNode.value;
                 }
-
-                if (treeNode.id) {
+                 if (treeNode.id) {
                     attributes.id = treeNode.id;
                 }
-
-                for (var key in treeNode) {
+                 for (let key in treeNode) {
                     if (key.indexOf('data-') !== -1) {
                         attributes[key] = treeNode[key];
                     }
                 }
-
-                if (this.options.checkbox) {
-                    attributes['data-checked'] = treeNode.checked !== undefined && treeNode.checked !== 'none' ? this.setBoolean(treeNode.checked) : 'none';
+                 if (this.options.checkbox) {
+                    attributes['data-checked'] = treeNode.checked !== undefined && treeNode.checked !== 'none'
+                        ? setBoolean(treeNode.checked) : 'none';
                     if (treeNode.checkable !== undefined) {
-                        attributes['data-checkable'] = this.setBoolean(treeNode.checkable);
+                        attributes['data-checkable'] = setBoolean(treeNode.checkable);
                     }
                 }
-
-                if (treeNode.href) {
+                 if (treeNode.href) {
                     if (role === 'leaf') {
                         anchor = $('<a>').attr('href', treeNode.href);
                     } else {
                         attributes['data-href'] = treeNode.href;
                     }
                 }
-
-                var $text = $('<span>').addClass(ClassName.NODE_TEXT);
-
-                if (anchor) {
+                 const $text = $('<span>').addClass(ClassName.NODE_TEXT);
+                 if (anchor) {
                     $text.append(anchor.html(treeNode.text));
                 } else {
                     $text.html(treeNode.text);
                 }
-
-                node.attr(attributes).append($text);
-
-                if (treeNode.children) {
+                 node.attr(attributes).append($text);
+                 if (treeNode.children) {
                     node.append(this.createNodes(treeNode.children));
                 }
-
-                return node;
+                 return node;
             }
-        }, {
-            key: 'createNodes',
-            value: function createNodes(nodes) {
-                var _this4 = this;
+             createNodes(nodes) {
+                const branch = $('ul').addClass(ClassName.TREE_BRANCH);
+                 nodes.forEach((treeNode) => branch.append(this.createNode(treeNode)));
+                 return branch;
+            }*/
 
-                var branch = $('ul').addClass(ClassName.TREE_BRANCH);
-
-                nodes.forEach(function (treeNode) {
-                    return branch.append(_this4.createNode(treeNode));
-                });
-
-                return branch;
-            }
         }, {
             key: 'checkLastNode',
             value: function checkLastNode() {
@@ -557,7 +604,7 @@ var BSTree = function ($) {
         }, {
             key: 'addIcons',
             value: function addIcons() {
-                var _this5 = this;
+                var _this4 = this;
 
                 var $element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
 
@@ -569,7 +616,7 @@ var BSTree = function ($) {
 
                 if (treeData.checkbox) {
                     $li.each(function (idx, el) {
-                        return _this5.initCheckbox(idx, el, treeData, baseIcon);
+                        return _this4.initCheckbox(idx, el, treeData, baseIcon);
                     });
                     $('li:last-child>span>' + Selector.CHECKBOX, this.$element).trigger(Event.CHANGE, [true]);
                 } else if (treeData.foldertree) {
@@ -579,7 +626,7 @@ var BSTree = function ($) {
 
                 var $first = $li.filter(':first');
                 if ($first.hasClass(ClassName.TREE_ROOT_HEADER)) {
-                    var _newIcon = $('<i>').addClass(ClassName.TREE_HEADER_ICON).addClass($first.hasClass(ClassName.TREE_CLOSED) ? ClassName.TOGGLE_RIGHT : ClassName.TOGGLE_DOWN);
+                    var _newIcon = $('<i>').addClass(ClassName.TREE_HEADER_ICON).addClass('glyphicon').addClass($first.hasClass(ClassName.TREE_CLOSED) ? ClassName.TOGGLE_RIGHT : ClassName.TOGGLE_DOWN);
                     $first.children('i.' + ClassName.TREE_ICON).remove();
                     $first.children('span.' + ClassName.NODE_TEXT).prepend(_newIcon);
                 }
@@ -618,34 +665,6 @@ var BSTree = function ($) {
                 });
 
                 return selected.join();
-            }
-        }, {
-            key: 'setBoolean',
-            value: function setBoolean(value) {
-                if (!value) {
-                    return false;
-                }
-
-                if (typeof value === 'string') {
-                    value = value.trim();
-
-                    if (!isNaN(value)) {
-                        return Boolean(parseFloat(value));
-                    }
-
-                    switch (value) {
-                        case 'true':
-                        case 'yes':
-                            value = true;
-                            break;
-                        case 'false':
-                        case 'no':
-                            value = false;
-                            break;
-                    }
-
-                    return Boolean(value);
-                }
             }
         }, {
             key: 'version',
@@ -692,12 +711,12 @@ var BSTree = function ($) {
     };
 
     return BSTree;
-}(_jquery2.default);
+}(_jquery2.default, _BSTreeNode2.default);
 
 exports.default = BSTree;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -707,32 +726,312 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* =============================================================
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * bootstrap-tree.js v0.5
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * http://github.com/cutterbl/Bootstrap-Tree
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Inspired by Twitter Bootstrap, with credit to bits of code
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * from all over.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * =============================================================
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2012 - 2018 Cutters Crossing.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Licensed under the GNU General Public License v2
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * you may not use this file except in compliance with the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You may obtain a copy of the License at
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ** http://www.gnu.org/licenses/gpl-2.0.html
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Unless required by applicable law or agreed to in writing, software
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * distributed under the License is distributed on an "AS IS" BASIS,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * See the License for the specific language governing permissions and
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * limitations under the License.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * ============================================================ */
+
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
+
+var _setBoolean = __webpack_require__(5);
+
+var _setBoolean2 = _interopRequireDefault(_setBoolean);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var BSTreeNode = function BSTreeNode(options) {
-    _classCallCheck(this, BSTreeNode);
+/**
+ * ----------------------------------------------------------------------
+ * Constants
+ * ----------------------------------------------------------------------
+ */
+var NAME = 'bstree';
+/*const VERSION = '0.0.5';
+const DATA_KEY = 'bs.tree';
+const EVENT_KEY = `.${DATA_KEY}`;
+//const DATA_API_KEY = '.data-api';
+const JQUERY_NO_CONFLICT = $.fn[NAME];
 
-    _jquery2.default.extend(true, this, {
-        text: undefined,
-        leaf: false,
-        value: undefined,
-        expanded: false,
-        cls: undefined,
-        id: undefined,
-        href: undefined,
-        checkable: false,
-        checked: 'none',
-        children: []
-    }, options);
+const Default = {
+    params: {
+        base: '',
+        request: {
+            dataType: 'json',
+            type: 'POST',
+            complete: $.noop,
+            error: $.noop,
+            success: $.noop
+        }
+    }
 };
 
+const Event = {
+    CLICK: `click${EVENT_KEY}`,
+    MOUSEENTER: `mouseenter${EVENT_KEY}`,
+    MOUSELEAVE: `mouseleave${EVENT_KEY}`,
+    CHANGE: `change${EVENT_KEY}`
+};*/
+
+var ClassName = {
+    TREE_ICON: NAME + '-icon',
+    TREE_NOICON: NAME + '-noicon',
+    TREE_LEAF: NAME + '-leaf',
+    TREE_BRANCH: NAME + '-branch',
+    TREE_FIRST: NAME + '-first',
+    TREE_LAST: NAME + '-last',
+    TREE_HEADER_ICON: NAME + '-header-icon',
+    TREE_ROOT_HEADER: NAME + '-root-header',
+    TREE_OPEN: NAME + '-open',
+    TREE_CLOSED: NAME + '-closed',
+    TREE_CHECKBOX: NAME + '-checkbox',
+    TREE_CHECKED: NAME + '-checked',
+    TREE_LOADING: NAME + '-loading',
+    TREE_HOVERED: NAME + '-hovered',
+    TREE_UNCHECKED: NAME + '-unchecked',
+    TREE_UNDETERMINED: NAME + '-undetermined',
+    TOGGLE_RIGHT: 'glyphicon-chevron-right',
+    TOGGLE_DOWN: 'glyphicon-chevron-down',
+    NODE_TEXT: 'node-text'
+};
+
+/*const Selector = {
+    CHECKBOX: 'input:checkbox'
+};*/
+
+var BSTreeNode = function () {
+    function BSTreeNode(options, treeOptions) {
+        _classCallCheck(this, BSTreeNode);
+
+        this.$element = (0, _jquery2.default)('<li>');
+        this.$text = (0, _jquery2.default)('<span>').addClass(ClassName.NODE_TEXT);
+        this.attributes = {};
+        this.$anchor = null;
+        this.treeOptions = treeOptions;
+
+        this.initialize(options);
+    }
+
+    _createClass(BSTreeNode, [{
+        key: 'initialize',
+        value: function initialize(options) {
+            this.setOptions(options);
+            this.setNodeClass();
+            this.normalizeCheckbox();
+            this.setHref();
+            this.setText();
+            this.attachAttributes();
+            this.attachChildren();
+        }
+    }, {
+        key: 'setOptions',
+        value: function setOptions(options) {
+            _jquery2.default.extend(true, this, {
+                text: undefined,
+                leaf: false,
+                value: undefined,
+                expanded: false,
+                cls: undefined,
+                id: undefined,
+                href: undefined,
+                checkable: false,
+                checked: 'none',
+                children: []
+            }, options);
+        }
+    }, {
+        key: 'setNodeClass',
+        value: function setNodeClass() {
+            if (this.leaf) {
+                this.$element.addClass(ClassName.TREE_LEAF);
+            } else {
+                this.$element.addClass(this.expanded ? ClassName.TREE_OPEN : ClassName.TREE_CLOSED);
+            }
+        }
+    }, {
+        key: 'normalizeCheckbox',
+        value: function normalizeCheckbox() {
+            if (!this.treeOptions.checkbox) {
+                delete this.attributes['data-checkable'];
+                delete this.attributes['data-checked'];
+            }
+        }
+    }, {
+        key: 'setHref',
+        value: function setHref() {
+            if (this.href) {
+                if (this.leaf) {
+                    this.$anchor = (0, _jquery2.default)('<a>').attr('href', this.href);
+                } else {
+                    this.attributes['data-href'] = this.href;
+                }
+            }
+        }
+    }, {
+        key: 'setText',
+        value: function setText() {
+            if (this.$anchor) {
+                this.$anchor.html(this.text);
+                this.$text.append(this.$anchor);
+            } else {
+                this.$text.html(this.text);
+            }
+
+            this.$element.append(this.$text);
+        }
+    }, {
+        key: 'attachAttributes',
+        value: function attachAttributes() {
+            this.$element.attr(this.attributes);
+        }
+    }, {
+        key: 'attachChildren',
+        value: function attachChildren() {
+            var _this = this;
+
+            if (this.children && this.children.length) {
+                var $ul = (0, _jquery2.default)('<ul>').addClass(ClassName.TREE_BRANCH);
+
+                this.children.forEach(function (child) {
+                    var node = new BSTreeNode(child, _this.treeOptions);
+                    var $node = node.element;
+                    $ul.append($node);
+                });
+                this.$element.append($ul);
+            }
+        }
+    }, {
+        key: 'leaf',
+        set: function set(value) {
+            this._leaf = (0, _setBoolean2.default)(value);
+            this.role = this._leaf ? 'leaf' : 'branch';
+        },
+        get: function get() {
+            return this._leaf;
+        }
+    }, {
+        key: 'value',
+        set: function set(value) {
+            this.attributes['data-value'] = value;
+        },
+        get: function get() {
+            return this.attributes['data-value'];
+        }
+    }, {
+        key: 'id',
+        set: function set(value) {
+            this.attributes.id = value;
+        },
+        get: function get() {
+            return this.attributes.id;
+        }
+    }, {
+        key: 'checked',
+        set: function set(value) {
+            this.attributes['data-checked'] = value !== undefined && value !== 'none' ? (0, _setBoolean2.default)(value) : 'none';
+        },
+        get: function get() {
+            return this.attributes['data-checked'];
+        }
+    }, {
+        key: 'checkable',
+        set: function set(value) {
+            if (value !== undefined) {
+                this.attributes['data-checkable'] = (0, _setBoolean2.default)(value);
+            }
+        },
+        get: function get() {
+            return this.attributes['data-checkable'];
+        }
+    }, {
+        key: 'expanded',
+        set: function set(value) {
+            this._expanded = value;
+        },
+        get: function get() {
+            return this._expanded;
+        }
+    }, {
+        key: 'element',
+        set: function set($el) {
+            this.$element = $el;
+            var options = $el.data();
+            options.id = $el.attr('id');
+
+            this.initialize(options);
+        },
+        get: function get() {
+            return this.$element;
+        }
+    }]);
+
+    return BSTreeNode;
+}();
+
 exports.default = BSTreeNode;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = setBoolean;
+function setBoolean(value) {
+    if (!value) {
+        return false;
+    }
+
+    if (typeof value === 'string') {
+        value = value.trim();
+
+        if (!isNaN(value)) {
+            return Boolean(parseFloat(value));
+        }
+
+        switch (value) {
+            case 'true':
+            case 'yes':
+                value = true;
+                break;
+            case 'false':
+            case 'no':
+                value = false;
+                break;
+        }
+
+        return Boolean(value);
+    }
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

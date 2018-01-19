@@ -1,40 +1,45 @@
-/*!
- * Bootstrap Tree v0.4
+/* =============================================================
+ * bootstrap-tree.js v0.5
+ * http://github.com/cutterbl/Bootstrap-Tree
  *
- * Copyright 2013 Cutters Crossing
- * Bootstrap is Copyright 2012 Twitter, Inc.
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
+ * Inspired by Twitter Bootstrap, with credit to bits of code
+ * from all over.
+ * =============================================================
+ * Copyright 2012 - 2018 Cutters Crossing.
  *
- * Designed and built with all the love in the world by @cutterbl.
- */
-.clearfix {
-  *zoom: 1;
-}
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.clearfix:after {
-  clear: both;
-}
-.hide-text {
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-.input-block-level {
-  display: block;
-  width: 100%;
-  min-height: 30px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+ * Licensed under the GNU General Public License v2
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ ** http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
+/* =============================================================
+ * bootstrap-tree.js v0.5
+ * http://github.com/cutterbl/Bootstrap-Tree
+ *
+ * Inspired by Twitter Bootstrap, with credit to bits of code
+ * from all over.
+ * =============================================================
+ * Copyright 2012 - 2018 Cutters Crossing.
+ *
+ * Licensed under the GNU General Public License v2
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ ** http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
 .bstree ul,
 .bstree li {
   display: block;
@@ -58,11 +63,11 @@
 }
 .bstree > ul > li.bstree-root-header > span.node-text {
   display: block;
-  padding: 10px;
+  margin: 10px;
+  height: 1.2em;
   font-size: 1.2em;
   font-weight: bold;
   /*background-color: #999;*/
-
 }
 .bstree > ul > li.bstree-root-header > span.node-text > i.bstree-header-icon {
   position: relative;
@@ -75,7 +80,7 @@
   padding-bottom: 10px;
 }
 .bstree > ul > li.bstree-root-header.bstree-closed > span.node-text {
-  overflow: none !important;
+  overflow: initial !important;
 }
 .bstree i.bstree-icon {
   display: inline-block;
@@ -87,9 +92,7 @@
 }
 .bstree li,
 .bstree i.bstree-icon {
-  background-image: url("../img/d.png");
-  background-repeat: no-repeat;
-  background-color: transparent;
+  background: transparent url('../img/d.png') no-repeat;
 }
 .bstree li {
   background-position: -90px 0;
@@ -142,8 +145,7 @@
   background-position: -54px 0;
 }
 .bstree .bstree-closed > i.bstree-loading {
-  background-image: url("/bootstrap-tree/img/ajax-loader.gif");
-  background-position: 0 0;
+  background: url("../img/ajax-loader.gif") 0 0;
 }
 .bstree .bstree-closed > span.node-text .bstree-icon {
   background-position: -56px -18px;
@@ -165,46 +167,13 @@
   border: 1px solid #d8f0fa;
   padding: 0 2px 0 1px;
 }
-/* IE6 BEGIN */
-.bstree li,
-.bstree i,
-.bstree .bstree-open i.bstree-icon {
-  _background-position: -72px 0;
-}
-.bstree .bstree-closed i.bstree-icon {
-  _background-position: -54px 0;
-}
-.bstree .bstree-leaf i.bstree-icon {
-  _background-position: -36px 0;
-}
-.bstree-default span.node-text .bstree-icon {
-  _background-position: -56px -18px;
-}
-.bstree-default .bstree-undetermined span.node-text .bstree-checkbox {
-  _background-position: -20px -18px;
-}
-.bstree-default .bstree-checked span.node-text .bstree-checkbox {
-  _background-position: -38px -18px;
-}
-.bstree-default .bstree-unchecked span.node-text .bstree-checkbox {
-  _background-position: -2px -18px;
-}
-/* IE6 END */.bstree-box {
+.bstree-box {
   overflow-x: auto;
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  /* IE6-7 */
-
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
   border-radius: 6px;
   -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding-box;
   background-clip: padding-box;
   outline: none;
 }

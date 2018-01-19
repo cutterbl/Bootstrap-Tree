@@ -4,7 +4,7 @@
   "description": "A heirarchical tree view built for use with Twitter Bootstrap 3.3.7.",
   "main": "dist/cc-bootstrap-tree.min.js",
   "scripts": {
-    "build": "webpack --config webpack.config.babel.js",
+    "build": "webpack --config webpack.config.babel.js && rimraf dist/*extra.*",
     "test": "jasmine"
   },
   "repository": {
@@ -28,13 +28,24 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "babili-webpack-plugin": "^0.1.2",
     "bootstrap": "3.3.7",
     "bootstrap-sass": "3.3.7",
+    "copy-webpack-plugin": "^4.3.1",
+    "css-loader": "^0.28.9",
     "eslint": "^4.15.0",
     "eslint-loader": "^1.9.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "jasmine": "^2.8.0",
     "jasmine-es6": "^0.4.3",
     "jquery": "3.2.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "node-sass": "^4.7.2",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
     "webpack": "^3.10.0"
   }
 }

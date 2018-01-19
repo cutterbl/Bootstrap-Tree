@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-        <link href="../bootstrap-tree/css/bootstrap-tree.css" rel="stylesheet">
+        <link href="../dist/css/cc-bootstrap-tree-extra.min.css" rel="stylesheet">
         <style>
           body {
               padding-top: 60px;
@@ -24,24 +24,18 @@
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <!-- <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target="#cc-example-navbar-collapse-1" type="button" data-toggle="collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </a> -->
-                    <a class="brand" href="##">Bootstrap Tree</a>
-                    <!-- <div class="nav-collapse collapse">
-                        <p class="navbar-text pull-right">
-                            Logged in as <a href="#" class="navbar-link">Username</a>
-                        </p>
-                        <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div> --><!--/.nav-collapse -->
+                    </button>
+                    <a class="navbar-brand" href="##">Bootstrap Tree</a>
+                </div>
+                <div class="collapse navbar-collapse" id="cc-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav"></ul>
                 </div>
             </div>
         </div>
@@ -92,7 +86,7 @@
         </div>
         <script src="../node_modules/jquery/dist/jquery.js"></script>
         <script src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-        <script src="../dist/cc-bootstrap-tree.min.js"></script>
+        <script src="../dist/cc-bootstrap-tree.js"></script>
         <script src="example.js"></script>
     </body>
 </html>

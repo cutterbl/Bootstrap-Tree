@@ -1,7 +1,29 @@
+/* =============================================================
+ * bootstrap-tree.js v0.5
+ * http://github.com/cutterbl/Bootstrap-Tree
+ *
+ * Inspired by Twitter Bootstrap, with credit to bits of code
+ * from all over.
+ * =============================================================
+ * Copyright 2012 - 2018 Cutters Crossing.
+ *
+ * Licensed under the GNU General Public License v2
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ ** http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
+
 import $ from 'jquery';
 import BSTreeNode from './BSTreeNode.class';
 
-const BSTree = (($) => {
+const BSTree = (($, BSTreeNode) => {
 
     /**
      * ----------------------------------------------------------------------
@@ -34,7 +56,7 @@ const BSTree = (($) => {
         MOUSELEAVE: `mouseleave${EVENT_KEY}`,
         CHANGE: `change${EVENT_KEY}`
     };
-    
+
     const ClassName = {
         TREE_ICON: `${NAME}-icon`,
         TREE_NOICON: `${NAME}-noicon`,
@@ -52,8 +74,8 @@ const BSTree = (($) => {
         TREE_HOVERED: `${NAME}-hovered`,
         TREE_UNCHECKED: `${NAME}-unchecked`,
         TREE_UNDETERMINED: `${NAME}-undetermined`,
-        TOGGLE_RIGHT: 'icon-chevron-right',
-        TOGGLE_DOWN: 'icon-chevron-down',
+        TOGGLE_RIGHT: 'glyphicon-chevron-right',
+        TOGGLE_DOWN: 'glyphicon-chevron-down',
         NODE_TEXT: 'node-text'
     };
 
@@ -132,7 +154,7 @@ const BSTree = (($) => {
                 if (!$.isEmptyObject(data)) {
                     this.processNode($this, $parent, data);
                 } else {
-                    $parent.toggleClass(`${ClassName.TREE_OPEN} ${ClassName.TREE_CLOSED}`);
+                    $parent.parent().toggleClass(`${ClassName.TREE_OPEN} ${ClassName.TREE_CLOSED}`);
                     $this.toggleClass(`${ClassName.TOGGLE_RIGHT} ${ClassName.TOGGLE_DOWN}`);
                 }
             }
@@ -275,7 +297,7 @@ const BSTree = (($) => {
             return $.ajax(requestParams)
                 .done((data, status, xhr) => {
                     this.buildOutput(data, $parent);
-                    return this.options.params.success(data, status, xhr);
+                    return this.options.params.request.success(data, status, xhr);
                 })
                 .fail(this.options.params.request.error)
                 .always((data, status) => {
@@ -285,6 +307,30 @@ const BSTree = (($) => {
         }
 
         buildOutput(data, $parent) {
+            if (data && Array.isArray(data) && data.length) {
+                $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
+
+                const $branch = this.createNodes(data);
+
+                $parent.append($branch);
+                this.addIcons($branch);
+                $parent.data('loaded', true);
+            }
+        }
+
+        createNodes(nodes) {
+            const $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
+
+            nodes.forEach((treeNode) => {
+                const node = new BSTreeNode(treeNode, this.options);
+                const $node= node.element;
+                $branch.append($node);
+            });
+
+            return $branch;
+        }
+
+        /*buildOutput(data, $parent) {
             const nodes = this.buildNodes(data);
 
             $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
@@ -312,11 +358,11 @@ const BSTree = (($) => {
                 let keyValue = key !== 'children' ? node[key] : this.buildNodes(node.children);
 
                 if (!Array.isArray(keyValue)) {
-                    keyValue = keyValue.trim();
+                    keyValue = $.trim(keyValue);
                 }
                 if (keyValue.length) {
                     options[key] = ['leaf', 'expanded', 'checkable', 'checked'].includes(key)
-                        ? this.setBoolean(keyValue) : keyValue;
+                        ? setBoolean(keyValue) : keyValue;
                 }
             }
 
@@ -325,7 +371,7 @@ const BSTree = (($) => {
 
         createNode(treeNode) {
             const node = $('<li>');
-            const role = this.setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
+            const role = setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
             const attributes = {};
             let anchor = null;
 
@@ -351,9 +397,9 @@ const BSTree = (($) => {
 
             if (this.options.checkbox) {
                 attributes['data-checked'] = treeNode.checked !== undefined && treeNode.checked !== 'none'
-                    ? this.setBoolean(treeNode.checked) : 'none';
+                    ? setBoolean(treeNode.checked) : 'none';
                 if (treeNode.checkable !== undefined) {
-                    attributes['data-checkable'] = this.setBoolean(treeNode.checkable);
+                    attributes['data-checkable'] = setBoolean(treeNode.checkable);
                 }
             }
 
@@ -388,7 +434,7 @@ const BSTree = (($) => {
             nodes.forEach((treeNode) => branch.append(this.createNode(treeNode)));
 
             return branch;
-        }
+        }*/
 
         checkLastNode() {
             const $lastChild = $('li:last-child', this.$element);
@@ -416,6 +462,7 @@ const BSTree = (($) => {
             if ($first.hasClass(ClassName.TREE_ROOT_HEADER)) {
                 const newIcon = $('<i>')
                     .addClass(ClassName.TREE_HEADER_ICON)
+                    .addClass('glyphicon')
                     .addClass($first.hasClass(ClassName.TREE_CLOSED) ? ClassName.TOGGLE_RIGHT : ClassName.TOGGLE_DOWN);
                 $first.children(`i.${ClassName.TREE_ICON}`).remove();
                 $first.children(`span.${ClassName.NODE_TEXT}`).prepend(newIcon);
@@ -476,33 +523,6 @@ const BSTree = (($) => {
 
             return selected.join();
         }
-
-        setBoolean(value) {
-            if (!value) {
-                return false;
-            }
-
-            if (typeof value === 'string') {
-                value = value.trim();
-
-                if (!isNaN(value)) {
-                    return Boolean(parseFloat(value));
-                }
-
-                switch (value) {
-                case 'true':
-                case 'yes':
-                    value = true;
-                    break;
-                case 'false':
-                case 'no':
-                    value = false;
-                    break;
-                }
-
-                return Boolean(value);
-            }
-        }
     }
 
     $.fn[NAME] = BSTree._jQueryInterface;
@@ -515,6 +535,6 @@ const BSTree = (($) => {
 
     return BSTree;
 
-})($);
+})($, BSTreeNode);
 
 export default BSTree;
