@@ -112,7 +112,7 @@ const BSTree = (($, BSTreeNode) => {
 
             this.setupEventHandlers();
 
-            this.addIcons();
+            //this.addIcons();
         }
 
         setupEventHandlers() {
@@ -128,7 +128,15 @@ const BSTree = (($, BSTreeNode) => {
                 /* on change of checkboxes */
                 .on(`${Event.CHANGE}.checkbox`, Selector.CHECKBOX, (event) => this.setNewState(event))
                 /* on click of checkboxes */
-                .on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event));
+                .on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
+                .on('show.bs.collapse', '.cc-bstree-branch', (event) => {
+                    const $el = $(event.currentTarget);
+                    $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
+                })
+                .on('hide.bs.collapse', '.cc-bstree-branch', (event) => {
+                    const $el = $(event.currentTarget);
+                    $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
+                });
         }
 
         treeIconClick(event) {
@@ -313,7 +321,7 @@ const BSTree = (($, BSTreeNode) => {
                 const $branch = this.createNodes(data);
 
                 $parent.append($branch);
-                this.addIcons($branch);
+                //this.addIcons($branch);
                 $parent.data('loaded', true);
             }
         }

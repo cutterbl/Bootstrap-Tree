@@ -45,25 +45,30 @@
                 <div class="col-md-3">
                     <div class="well bstree">
                       <ul>
-                        <li class="bstree-open"><span class="node-text">This is my text</span>
-                          <ul class="bstree-branch">
+                        <li class="bstree-open">
+                          <a href="#children_1" data-toggle="collapse" class="node-text">This is my text</a>
+                          <ul class="cc-bstree-branch collapse in" id="children_1">
                             <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-closed"><span class="node-text">This is my second leaf</span>
-                              <ul class="bstree-branch">
+                            <li class="bstree-closed">
+                              <a class="node-text" data-toggle="collapse" href="#children_2">This is my second leaf</a>
+                              <ul class="cc-bstree-branch collapse" id="children_2">
                                 <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
                                 <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                                <li class="bstree-closed" data-reload="true" data-loaded="false" data-href="Bootstrap-Tree/example/jsonexample.json" data-value="45"><span class="node-text">This is my third leaf</span></li>
+                                <li class="bstree-closed" data-reload="true" data-loaded="false" data-href="Bootstrap-Tree/example/jsonexample.json" data-value="45">
+                                    <span class="node-text">This is my third leaf</span>
+                                </li>
                               </ul>
                             </li>
                             <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
-                        <li class="bstree-closed" data-remote="true" data-type="json" data-nodeid="12"><!--  data-url="/jsonexample.json" -->
-                          <span class="node-text">This is my next branch</span>
-                          <ul class="bstree-branch">
+                        <li class="bstree-closed">
+                          <a href="#children_4" data-toggle="collapse" class="node-text">This is my next branch</a>
+                          <ul class="cc-bstree-branch collapse" id="children_4">
                             <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
                             <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                            <li class="bstree-closed" data-reload="false" data-loaded="false" data-href="jsonexample.json" data-value="55"><span class="node-text">This is my third leaf</span></li>
+                            <li class="bstree-closed" data-reload="false" data-loaded="false" data-href="jsonexample.json" data-value="55">
+                                <span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
                       </ul>
@@ -71,11 +76,13 @@
                     <p></p>
                     <div class="bstree" data-foldertree="true">
                       <ul>
-                        <li class="bstree-open"><span class="node-text">This is my text</span>
-                          <ul>
+                        <li class="bstree-open">
+                            <a href="#children_5" data-toggle="collapse" class="node-text">This is my text</a>
+                          <ul class="cc-bstree-branch collapse in" id="children_5">
                             <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-closed"><span class="node-text">This is my second leaf</span>
-                              <ul>
+                            <li class="bstree-closed">
+                              <a href="#children_6" data-toggle="collapse" class="node-text">This is my second leaf</a>
+                              <ul class="cc-bstree-branch collapse" id="children_6">
                                 <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
                                 <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
                                 <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
@@ -84,9 +91,9 @@
                             <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
-                        <li class="bstree-closed bstree-last" data-remote="true" data-type="json" data-nodeid="12"><!--  data-url="/jsonexample.json" -->
-                          <span class="node-text">This is my next branch</span>
-                          <ul>
+                        <li class="bstree-closed bstree-last">
+                          <a href="#children_7" data-toggle="collapse" class="node-text">This is my next branch</a>
+                          <ul class="cc-bstree-branch collapse" id="children_7">
                             <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
                             <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
                             <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>

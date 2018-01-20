@@ -209,7 +209,54 @@
     }
     
   }
-  
+
+  /**
+   *  ***** The New Stuff ***
+   */
+  a.node-text {
+    outline: none;
+    display: block;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: inherit;
+      text-decoration: none;
+    }
+    &:before {
+      position: relative;
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+      margin-right:3px;
+      content: ' ';
+      background: transparent url('../img/d.png') no-repeat;
+    }
+  }
+
+  li {
+    &.bstree {
+      &-closed {
+        &>a.node-text {
+          &:before {
+            background-position: -54px 0;
+          }
+        }
+      }
+      &-open {
+        &>a.node-text {
+          &:before {
+            background-position: -72px 0;
+          }
+        }
+      }
+    }
+  }
+  /**
+   *  ***** End of The New Stuff ***
+   */
+
+
   .bstree-hovered { 
     background:#e7f4f9; 
     border:1px solid #d8f0fa; 

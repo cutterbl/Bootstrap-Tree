@@ -272,7 +272,7 @@ var BSTree = function ($, BSTreeNode) {
 
                 this.setupEventHandlers();
 
-                this.addIcons();
+                //this.addIcons();
             }
         }, {
             key: 'setupEventHandlers',
@@ -299,6 +299,12 @@ var BSTree = function ($, BSTreeNode) {
                 /* on click of checkboxes */
                 .on(Event.CLICK + '.checkbox', '.' + ClassName.TREE_CHECKBOX, function (event) {
                     return _this.checkboxHandler(event);
+                }).on('show.bs.collapse', '.cc-bstree-branch', function (event) {
+                    var $el = $(event.currentTarget);
+                    $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
+                }).on('hide.bs.collapse', '.cc-bstree-branch', function (event) {
+                    var $el = $(event.currentTarget);
+                    $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
                 });
             }
         }, {
@@ -491,7 +497,7 @@ var BSTree = function ($, BSTreeNode) {
                     var $branch = this.createNodes(data);
 
                     $parent.append($branch);
-                    this.addIcons($branch);
+                    //this.addIcons($branch);
                     $parent.data('loaded', true);
                 }
             }

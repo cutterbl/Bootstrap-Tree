@@ -162,6 +162,32 @@
 .bstree .bstree-noicon > span.node-text .bstree-icon {
   background-position: -74px -54px;
 }
+.bstree a.node-text {
+  outline: none;
+  display: block;
+}
+.bstree a.node-text:link,
+.bstree a.node-text:visited,
+.bstree a.node-text:hover,
+.bstree a.node-text:active {
+  color: inherit;
+  text-decoration: none;
+}
+.bstree a.node-text:before {
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-right: 3px;
+  content: ' ';
+  background: transparent url('../img/d.png') no-repeat;
+}
+.bstree li.bstree-closed > a.node-text:before {
+  background-position: -54px 0;
+}
+.bstree li.bstree-open > a.node-text:before {
+  background-position: -72px 0;
+}
 .bstree .bstree-hovered {
   background: #e7f4f9;
   border: 1px solid #d8f0fa;
