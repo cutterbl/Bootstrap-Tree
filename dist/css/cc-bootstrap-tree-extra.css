@@ -40,6 +40,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ============================================================ */
+.bstree {
+  /**
+   *  ***** The New Stuff ***
+   */
+  /**
+   *  ***** End of The New Stuff ***
+   */
+}
 .bstree ul,
 .bstree li {
   display: block;

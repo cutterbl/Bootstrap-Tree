@@ -281,13 +281,10 @@ var BSTree = function ($, BSTreeNode) {
 
                 this.$element
                 /* on click for tree icons */
-                .on(Event.CLICK + '.coll-icon', 'li>i.' + ClassName.TREE_ICON, function (event) {
-                    return _this.treeIconClick(event);
-                })
+                //.on(`${Event.CLICK}.coll-icon`, `li>i.${ClassName.TREE_ICON}`, (event) => this.treeIconClick(event))
                 /* on click for the tree header icon */
-                .on(Event.CLICK + '.coll-icon', 'li>span.' + ClassName.NODE_TEXT + '>i.' + ClassName.TREE_HEADER_ICON, function (event) {
-                    return _this.treeHeaderIconClick(event);
-                })
+                //.on(`${Event.CLICK}.coll-icon`, `li>span.${ClassName.NODE_TEXT}>i.${ClassName.TREE_HEADER_ICON}`,
+                //    (event) => this.treeHeaderIconClick(event))
                 /* mouseenter and mouseleave for hover state on a node */
                 .on('' + Event.MOUSEENTER, '.' + ClassName.NODE_TEXT + ' ' + Event.MOUSELEAVE, '.' + ClassName.NODE_TEXT, function (event) {
                     return _this.hoverNode(event);
@@ -297,12 +294,13 @@ var BSTree = function ($, BSTreeNode) {
                     return _this.setNewState(event);
                 })
                 /* on click of checkboxes */
-                .on(Event.CLICK + '.checkbox', '.' + ClassName.TREE_CHECKBOX, function (event) {
-                    return _this.checkboxHandler(event);
-                }).on('show.bs.collapse', '.cc-bstree-branch', function (event) {
+                //.on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
+                .on('show.bs.collapse', '.cc-bstree-branch', function (event) {
+                    event.stopPropagation();
                     var $el = $(event.currentTarget);
                     $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
                 }).on('hide.bs.collapse', '.cc-bstree-branch', function (event) {
+                    event.stopPropagation();
                     var $el = $(event.currentTarget);
                     $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
                 });

@@ -118,22 +118,24 @@ const BSTree = (($, BSTreeNode) => {
         setupEventHandlers() {
             this.$element
                 /* on click for tree icons */
-                .on(`${Event.CLICK}.coll-icon`, `li>i.${ClassName.TREE_ICON}`, (event) => this.treeIconClick(event))
+                //.on(`${Event.CLICK}.coll-icon`, `li>i.${ClassName.TREE_ICON}`, (event) => this.treeIconClick(event))
                 /* on click for the tree header icon */
-                .on(`${Event.CLICK}.coll-icon`, `li>span.${ClassName.NODE_TEXT}>i.${ClassName.TREE_HEADER_ICON}`,
-                    (event) => this.treeHeaderIconClick(event))
+                //.on(`${Event.CLICK}.coll-icon`, `li>span.${ClassName.NODE_TEXT}>i.${ClassName.TREE_HEADER_ICON}`,
+                //    (event) => this.treeHeaderIconClick(event))
                 /* mouseenter and mouseleave for hover state on a node */
                 .on(`${Event.MOUSEENTER}`, `.${ClassName.NODE_TEXT} ${Event.MOUSELEAVE}`, `.${ClassName.NODE_TEXT}`,
                     (event) => this.hoverNode(event))
                 /* on change of checkboxes */
                 .on(`${Event.CHANGE}.checkbox`, Selector.CHECKBOX, (event) => this.setNewState(event))
                 /* on click of checkboxes */
-                .on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
+                //.on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
                 .on('show.bs.collapse', '.cc-bstree-branch', (event) => {
+                    event.stopPropagation();
                     const $el = $(event.currentTarget);
                     $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
                 })
                 .on('hide.bs.collapse', '.cc-bstree-branch', (event) => {
+                    event.stopPropagation();
                     const $el = $(event.currentTarget);
                     $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
                 });
