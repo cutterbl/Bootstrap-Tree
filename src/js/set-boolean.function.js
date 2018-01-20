@@ -20,7 +20,7 @@ export default function setBoolean(value) {
             value = false;
             break;
         }
-
-        return Boolean(value);
     }
+
+    return Boolean(value);
 }

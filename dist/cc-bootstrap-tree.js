@@ -503,7 +503,7 @@ var BSTree = function ($, BSTreeNode) {
                 var $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
 
                 nodes.forEach(function (treeNode) {
-                    var node = new BSTreeNode(treeNode, _this3.options);
+                    var node = new BSTreeNode({ options: treeNode, treeOptions: _this3.options });
                     var $node = node.element;
                     $branch.append($node);
                 });
@@ -819,7 +819,23 @@ var ClassName = {
 };*/
 
 var BSTreeNode = function () {
-    function BSTreeNode(options, treeOptions) {
+    function BSTreeNode(_ref) {
+        var _ref$options = _ref.options,
+            options = _ref$options === undefined ? {
+            text: '',
+            leaf: false,
+            value: undefined,
+            expanded: false,
+            cls: undefined,
+            id: undefined,
+            href: undefined,
+            checkable: false,
+            checked: 'none',
+            children: []
+        } : _ref$options,
+            _ref$treeOptions = _ref.treeOptions,
+            treeOptions = _ref$treeOptions === undefined ? {} : _ref$treeOptions;
+
         _classCallCheck(this, BSTreeNode);
 
         this.$element = (0, _jquery2.default)('<li>');
@@ -845,18 +861,7 @@ var BSTreeNode = function () {
     }, {
         key: 'setOptions',
         value: function setOptions(options) {
-            _jquery2.default.extend(true, this, {
-                text: undefined,
-                leaf: false,
-                value: undefined,
-                expanded: false,
-                cls: undefined,
-                id: undefined,
-                href: undefined,
-                checkable: false,
-                checked: 'none',
-                children: []
-            }, options);
+            Object.assign(this, options);
         }
     }, {
         key: 'setNodeClass',
@@ -912,7 +917,7 @@ var BSTreeNode = function () {
                 var $ul = (0, _jquery2.default)('<ul>').addClass(ClassName.TREE_BRANCH);
 
                 this.children.forEach(function (child) {
-                    var node = new BSTreeNode(child, _this.treeOptions);
+                    var node = new BSTreeNode({ options: child, treeOptions: _this.treeOptions });
                     var $node = node.element;
                     $ul.append($node);
                 });
@@ -1022,9 +1027,9 @@ function setBoolean(value) {
                 value = false;
                 break;
         }
-
-        return Boolean(value);
     }
+
+    return Boolean(value);
 }
 
 /***/ }),

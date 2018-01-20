@@ -322,7 +322,7 @@ const BSTree = (($, BSTreeNode) => {
             const $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
 
             nodes.forEach((treeNode) => {
-                const node = new BSTreeNode(treeNode, this.options);
+                const node = new BSTreeNode({options: treeNode, treeOptions: this.options});
                 const $node= node.element;
                 $branch.append($node);
             });

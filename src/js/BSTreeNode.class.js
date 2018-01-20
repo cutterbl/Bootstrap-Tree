@@ -82,7 +82,21 @@ const ClassName = {
 };*/
 
 export default class BSTreeNode {
-    constructor(options, treeOptions) {
+    constructor({
+        options = {
+            text: '',
+            leaf: false,
+            value: undefined,
+            expanded: false,
+            cls: undefined,
+            id: undefined,
+            href: undefined,
+            checkable: false,
+            checked: 'none',
+            children: []
+        },
+        treeOptions = {}
+    }) {
         this.$element = $('<li>');
         this.$text = $('<span>').addClass(ClassName.NODE_TEXT);
         this.attributes = {};
@@ -166,18 +180,7 @@ export default class BSTreeNode {
     }
 
     setOptions(options) {
-        $.extend(true, this, {
-            text: undefined,
-            leaf: false,
-            value: undefined,
-            expanded: false,
-            cls: undefined,
-            id: undefined,
-            href: undefined,
-            checkable: false,
-            checked: 'none',
-            children: []
-        }, options);
+        Object.assign(this, options);
     }
 
     setNodeClass() {
@@ -225,7 +228,7 @@ export default class BSTreeNode {
             const $ul = $('<ul>').addClass(ClassName.TREE_BRANCH);
 
             this.children.forEach((child) => {
-                const node = new BSTreeNode(child, this.treeOptions);
+                const node = new BSTreeNode({options:child, treeOptions: this.treeOptions});
                 const $node = node.element;
                 $ul.append($node);
             });
