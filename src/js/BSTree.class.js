@@ -22,6 +22,7 @@
 
 import $ from 'jquery';
 import BSTreeNode from './BSTreeNode.class';
+import setBoolean from './set-boolean.function';
 
 const BSTree = (($, BSTreeNode) => {
 
@@ -34,12 +35,13 @@ const BSTree = (($, BSTreeNode) => {
     const VERSION = '0.0.5';
     const DATA_KEY = 'bs.tree';
     const EVENT_KEY = `.${DATA_KEY}`;
+    const COLLAPSE_EVENT_KEY = '.bs.collapse';
     //const DATA_API_KEY = '.data-api';
     const JQUERY_NO_CONFLICT = $.fn[NAME];
 
     const Default = {
+        base: '',
         params: {
-            base: '',
             request: {
                 dataType: 'json',
                 type: 'POST',
@@ -51,14 +53,31 @@ const BSTree = (($, BSTreeNode) => {
     };
 
     const Event = {
-        CLICK: `click${EVENT_KEY}`,
-        MOUSEENTER: `mouseenter${EVENT_KEY}`,
-        MOUSELEAVE: `mouseleave${EVENT_KEY}`,
-        CHANGE: `change${EVENT_KEY}`
+        CHECKBOX_CLICK: `click.checkbox${EVENT_KEY}`,
+        CHECKBOX_CHANGE: `change.checkbox${EVENT_KEY}`,
+        CHECKALL_CHANGE: `change.checkall${EVENT_KEY}`,
+        COLLAPSE_SHOW: `show${COLLAPSE_EVENT_KEY}`,
+        COLLAPSE_HIDE: `hide${COLLAPSE_EVENT_KEY}`
     };
 
     const ClassName = {
+        FA_ADDER: 'fa fa-fw',
         TREE_ICON: `${NAME}-icon`,
+        NODE_TEXT: 'node-text',
+        TOGGLE_EXPAND: 'fa-chevron-right',
+        TOGGLE_COLLAPSE: 'fa-chevron-down',
+        TREE_LOADING: 'fa-spinner fa-spin',
+        TREE_OPEN: 'fa-folder-open',
+        TREE_CLOSED: 'fa-folder',
+        TREE_CHECK: `${NAME}-check`,
+        TREE_CHECKALL: `${NAME}-check-all`,
+        TREE_CHECKBOX: `${NAME}-checkbox`,
+        TREE_UNCHECKED: 'fa-square-o',
+        TREE_CHECKED: 'fa-check-square',
+        TREE_PARTIAL: 'fa-check-square-o',
+        ALL_CHECK_STATES: 'fa-square-o fa-check-square fa-check-square-o',
+        CHECKBOX_SETUP: `fa fa-fw ${NAME}-checkbox fa-square-o`,
+
         TREE_NOICON: `${NAME}-noicon`,
         TREE_LEAF: `${NAME}-leaf`,
         TREE_BRANCH: `${NAME}-branch`,
@@ -66,21 +85,23 @@ const BSTree = (($, BSTreeNode) => {
         TREE_LAST: `${NAME}-last`,
         TREE_HEADER_ICON: `${NAME}-header-icon`,
         TREE_ROOT_HEADER: `${NAME}-root-header`,
-        TREE_OPEN: `${NAME}-open`,
-        TREE_CLOSED: `${NAME}-closed`,
-        TREE_CHECKBOX: `${NAME}-checkbox`,
-        TREE_CHECKED: `${NAME}-checked`,
-        TREE_LOADING: `${NAME}-loading`,
-        TREE_HOVERED: `${NAME}-hovered`,
-        TREE_UNCHECKED: `${NAME}-unchecked`,
         TREE_UNDETERMINED: `${NAME}-undetermined`,
-        TOGGLE_RIGHT: 'glyphicon-chevron-right',
-        TOGGLE_DOWN: 'glyphicon-chevron-down',
-        NODE_TEXT: 'node-text'
+        TOGGLE_RIGHT: 'fa-chevron-right',
+        TOGGLE_DOWN: 'fa-chevron-down'
     };
 
     const Selector = {
-        CHECKBOX: 'input:checkbox'
+        TREE_ICON: `.${ClassName.TREE_ICON}`,
+        COLLAPSE: '.collapse',
+        CHECKBOX: 'input:checkbox',
+        CHECKED: 'input:checked',
+        CHECKBOX_LINKS: `.${ClassName.TREE_CHECK}`,
+        CHECKALL_LINKS: `.${ClassName.TREE_CHECKALL}`,
+        ALLCHECK_LINKS: `.${ClassName.TREE_CHECK}, .${ClassName.TREE_CHECKALL}`,
+        ANYCHECK_LINKS: `[class^="${ClassName.TREE_CHECK}"]`,
+        CHECKBOX_INPUTS: `.${ClassName.TREE_CHECK}>input`,
+        ALLCHECK_INPUTS: `.${ClassName.TREE_CHECKALL}>input`,
+        CHECKBOX_ICON: `.${ClassName.TREE_CHECKBOX}`
     };
 
     class BSTree {
@@ -88,6 +109,8 @@ const BSTree = (($, BSTreeNode) => {
             this.type = NAME;
             this.$element = $(element);
             this.options = $.extend(true, {}, $.fn[this.type].defaults, this.$element.data(), options);
+            this.expandIcon = this.options.foldertree ? ClassName.TREE_CLOSED : ClassName.TOGGLE_EXPAND;
+            this.collapseIcon = this.options.foldertree ? ClassName.TREE_OPEN : ClassName.TOGGLE_COLLAPSE;
             this.initialize();
         }
 
@@ -108,185 +131,119 @@ const BSTree = (($, BSTreeNode) => {
         }
 
         initialize() {
-            this.checkLastNode();
+            this.addIcons();
 
-            this.setupEventHandlers();
-
-            //this.addIcons();
+            this.createEventHandlers();
         }
 
-        setupEventHandlers() {
+        createEventHandlers() {
             this.$element
-                /* on click for tree icons */
-                //.on(`${Event.CLICK}.coll-icon`, `li>i.${ClassName.TREE_ICON}`, (event) => this.treeIconClick(event))
-                /* on click for the tree header icon */
-                //.on(`${Event.CLICK}.coll-icon`, `li>span.${ClassName.NODE_TEXT}>i.${ClassName.TREE_HEADER_ICON}`,
-                //    (event) => this.treeHeaderIconClick(event))
-                /* mouseenter and mouseleave for hover state on a node */
-                .on(`${Event.MOUSEENTER}`, `.${ClassName.NODE_TEXT} ${Event.MOUSELEAVE}`, `.${ClassName.NODE_TEXT}`,
-                    (event) => this.hoverNode(event))
-                /* on change of checkboxes */
-                .on(`${Event.CHANGE}.checkbox`, Selector.CHECKBOX, (event) => this.setNewState(event))
-                /* on click of checkboxes */
-                //.on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
-                .on('show.bs.collapse', '.cc-bstree-branch', (event) => {
-                    event.stopPropagation();
-                    const $el = $(event.currentTarget);
-                    $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
-                })
-                .on('hide.bs.collapse', '.cc-bstree-branch', (event) => {
-                    event.stopPropagation();
-                    const $el = $(event.currentTarget);
-                    $el.parent().toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
-                });
+                .on(Event.COLLAPSE_SHOW, Selector.COLLAPSE, (event) => this.expandTree(event))
+                .on(Event.COLLAPSE_HIDE, Selector.COLLAPSE, (event) => this.collapseTree(event))
+                .on(Event.CHECKBOX_CLICK, Selector.ALLCHECK_LINKS, (event) => this.checkClickHandler(event))
+                .on(Event.CHECKBOX_CHANGE, Selector.CHECKBOX_INPUTS, (event) => this.checkboxChangeHandler(event))
+                .on(Event.CHECKALL_CHANGE, Selector.ALLCHECK_INPUTS, (event) => this.checkallChangeHandler(event));
         }
 
-        treeIconClick(event) {
-            const $this = $(event.currentTarget);
-            const $parent = $this.parent();
-            const data = $parent.data();
+        checkClickHandler(event) {
+            event.preventDefault();
+            const $target = $(event.currentTarget);
+            const href = $target.attr('href');
+            const $input = $(href);
+            const checked = $input.prop('checked');
+            this.toggleCheckboxValue($input, !checked);
+            $input.change();
+            // now normalize the branch
+            const $branch = $target.closest('ul');
+            this.normalizeBranch($branch);
+        }
 
-            if (!$parent.hasClass(ClassName.TREE_LEAF)) {
-                if (!$.isEmptyObject(data)) {
-                    this.processNode($this, $parent, data);
-                } else {
-                    $parent.toggleClass(`${ClassName.TREE_OPEN} ${ClassName.TREE_CLOSED}`);
+        checkboxChangeHandler(event) {
+            event.preventDefault();
+            const $target = $(event.currentTarget);
+            const checked = $target.prop('checked');
+            const $parent = $target.parent();
+            const $icon = $(Selector.CHECKBOX_ICON, $parent);
+            this.toggleCheckMark($icon, checked);
+        }
+
+        checkallChangeHandler(event) {
+            event.preventDefault();
+            const $target = $(event.currentTarget);
+            const checked = $target.prop('checked');
+            const $parent = $target.parent();
+            const $icon = $(Selector.CHECKBOX_ICON, $parent);
+            // toggle the checkmark of this checkall
+            this.toggleCheckMark($icon, checked);
+            // find the 'branch'
+            const branchId = $parent.prev().attr('href');
+            const $branch = $(branchId, $parent.closest('li'));
+            this.toggleAll($branch, checked);
+        }
+
+        toggleCheckMark($icon, value) {
+            $icon.removeClass(ClassName.ALL_CHECK_STATES)
+                .addClass(value ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
+        }
+
+        toggleCheckboxValue($input, value) {
+            $input.prop('checked', value);
+        }
+
+        toggleAll($branch, value) {
+            const $inputs = $(Selector.CHECKBOX, $branch);
+            $inputs.prop('checked', value).change();
+        }
+
+        normalizeBranch($branch) {
+            const $checkAll = $(Selector.CHECKALL_LINKS, $branch.prev());
+            const $inputs = $(Selector.CHECKBOX, $branch);
+            if ($inputs.length) {
+                const $checked = $inputs.filter(':checked');
+                let iconClass = ClassName.TREE_UNCHECKED;
+                let value = false;
+                if ($inputs.length === $checked.length) {
+                    iconClass = ClassName.TREE_CHECKED;
+                    value = true;
+                } else if ($checked.length < $inputs.length) {
+                    iconClass = ClassName.TREE_PARTIAL;
                 }
+                const $input = $(Selector.CHECKBOX, $checkAll);
+                this.toggleCheckboxValue($input, value);
+                $(Selector.CHECKBOX_ICON, $checkAll)
+                    .removeClass(ClassName.ALL_CHECK_STATES)
+                    .addClass(iconClass);
             }
         }
 
-        treeHeaderIconClick(event) {
-            const $this = $(event.currentTarget);
-            const $parent = $this.parent();
-            const data = $parent.data();
-
-            if (!$parent.hasClass(ClassName.TREE_LEAF)) {
-                if (!$.isEmptyObject(data)) {
-                    this.processNode($this, $parent, data);
-                } else {
-                    $parent.parent().toggleClass(`${ClassName.TREE_OPEN} ${ClassName.TREE_CLOSED}`);
-                    $this.toggleClass(`${ClassName.TOGGLE_RIGHT} ${ClassName.TOGGLE_DOWN}`);
-                }
+        expandTree(event) {
+            event.stopPropagation();
+            const $el = $(event.currentTarget);
+            const data = $el.data();
+            const $icon = $(Selector.TREE_ICON, $el.prev());
+            $icon.removeClass(this.expandIcon);
+            if (!data.href || setBoolean(data.loaded)) {
+                $icon.addClass(this.collapseIcon);
+            }
+            if (data.href && (setBoolean(data.reload) || !setBoolean(data.loaded))) {
+                $icon.addClass(ClassName.TREE_LOADING);
+                this.getData($el)
+                    .always(() => $icon.removeClass(ClassName.TREE_LOADING).addClass(this.collapseIcon));
             }
         }
 
-        hoverNode(event) {
-            $(event.currentTarget).toggleClass(ClassName.TREE_HOVERED);
+        collapseTree(event) {
+            event.stopPropagation();
+            const $el = $(event.currentTarget);
+            const $icon = $(Selector.TREE_ICON, $el.prev());
+            $icon.removeClass(this.collapseIcon).addClass(this.expandIcon);
         }
 
-        setNewState(event, ctrlKey = null, checked = null) {
-            const $this = $(event.currentTarget);
-            const $parentLi = $this.closest('li');
-            const $leaves = $('ul li', $parentLi);
-            const $icon = $this.prev(`i[class~=${ClassName.TREE_CHECKBOX}]`);
-            checked = checked !== null ? checked : $this.prop('checked');
-
-            $icon.removeClass(`${ClassName.TREE_CHECKED} ${ClassName.TREE_UNCHECKED} ${ClassName.TREE_UNDETERMINED}`);
-
-            if ($leaves) {
-                $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-            } else {
-                const $leafCheckboxes = $(Selector.CHECKBOX, $leaves);
-                const $leafIcons = $(`i[class~=${ClassName.TREE_CHECKBOX}]`, $leaves);
-
-                if (!ctrlKey) {
-                    $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                    $leafCheckboxes.prop('checked', checked);
-                    $leafCheckboxes.each((idx, el) => {
-                        const $li = $(el).closest('li');
-                        const leafData = $li.data();
-
-                        if (leafData.checked !== checked) {
-                            $li.data('checked', checked);
-                        }
-                    });
-                    $leafIcons
-                        .removeClass(ClassName.TREE_CHECKED)
-                        .removeClass(ClassName.TREE_UNCHECKED)
-                        .removeClass(ClassName.TREE_UNDETERMINED);
-                } else {
-                    const $selectedChild = $.grep($leafCheckboxes, (el) => $(el).prop('checked'));
-
-                    if ($selectedChild) {
-                        $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNDETERMINED);
-                    } else {
-                        $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                    }
-                }
-            }
-
-            //this.checkParent($parentLi);
-            console.log('event data', event.data); // eslint-disable-line no-console
-        }
-
-        checkParent ($node) {
-            const $parent = $node.closest('ul').parent('li');
-            const $span = $parent.children('span');
-            const $childCheckboxes = $(`ul li>span>${Selector.CHECKBOX}`, $parent);
-            const $checkedCheckboxes = $childCheckboxes.filter(':checked');
-            let state = 'checked';
-
-            if (!$parent) {
-                return;
-            }
-
-            if (!$checkedCheckboxes) {
-                state = 'unchecked';
-            } else if ($checkedCheckboxes.length < $childCheckboxes.length) {
-                state = 'undetermined';
-            }
-
-            const $spanChildren = $span.children(Selector.CHECKBOX);
-            const checked = state === 'checked';
-
-            $spanChildren.prop('checked', checked);
-            $spanChildren.each((idx, el) => {
-                const $li = $(el).closest('li');
-                const leafData = $li.data();
-
-                if (leafData.checked !== checked) {
-                    $li.data('checked', checked);
-                }
-            });
-
-            $(`i.${ClassName.TREE_CHECKBOX}`, $span)
-                .removeClass(`${ClassName.TREE_CHECKED} ${ClassName.TREE_UNCHECKED} ${ClassName.TREE_UNDETERMINED}`)
-                .addClass(ClassName[`TREE_${state.toUpperCase()}`]);
-            // Do we open, or close the branch?
-            $parent
-                .removeClass(`${ClassName.TREE_OPEN} ${ClassName.TREE_CLOSED}`)
-                .addClass(state === 'checked' ? ClassName.TREE_CLOSED : ClassName.TREE_OPEN);
-            this.checkParent($parent);
-        }
-
-        checkboxHandler(event) {
-            const $this = $(event.currentTarget);
-            const $parentLi = $this.closest('li');
-            //const parentData = $parentLi.data();
-            const checkbox = $this.next(Selector.CHECKBOX);
-            const checked = checkbox.prop('checked');
-
-            $parentLi.data('checked', !checked);
-            checkbox.prop('checked', !checked).trigger(Event.CHANGE, [event.ctrlKey, !checked]);
-        }
-
-        processNode($node, $parent, data) {
-            data.loaded = data.loaded !== undefined ? data.loaded : false;
-            data.reload = data.reload !== undefined ? data.reload : false;
-            data.href = data.href !== undefined ? data.href : null;
-
-            if ($parent.hasClass(ClassName.TREE_CLOSED) && data.href) {
-                if (!data.loaded || data.reload) {
-                    this.getRemoteData($node, $parent, data)
-                        .always(() => $parent.toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`));
-                }
-            }
-        }
-
-        getRemoteData($node, $parent, data) {
+        getData($node) {
+            const data = $node.data();
             let opts = $.extend(true, {}, this.options.params);
             let requestParams = {
-                url: `${opts.base}${data.href}`,
+                url: `${this.options.base}${data.href}`,
                 context: $node,
                 data: $.extend(true, {}, data)
             };
@@ -300,207 +257,60 @@ const BSTree = (($, BSTreeNode) => {
 
             requestParams = $.extend(true, opts.request, requestParams);
 
-            const $children = $parent.children(`i.${ClassName.TREE_ICON}`);
-
-            $children.addClass(ClassName.TREE_LOADING);
-
             return $.ajax(requestParams)
                 .done((data, status, xhr) => {
-                    this.buildOutput(data, $parent);
+                    this.buildBranch($node, data);
+                    $node.data('loaded', true);
                     return this.options.params.request.success(data, status, xhr);
                 })
                 .fail(this.options.params.request.error)
                 .always((data, status) => {
-                    $children.removeClass(ClassName.TREE_LOADING);
                     return this.options.params.request.complete(data, status);
                 });
         }
 
-        buildOutput(data, $parent) {
+        buildBranch($branch, data) {
             if (data && Array.isArray(data) && data.length) {
-                $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
+                $branch.empty(); // this is in case it is being 'reloaded', otherwise it's already empty
 
-                const $branch = this.createNodes(data);
+                const nodes = this.buildNodes(data);
 
-                $parent.append($branch);
-                //this.addIcons($branch);
-                $parent.data('loaded', true);
+                $branch.append(nodes);
             }
         }
 
-        createNodes(nodes) {
-            const $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
+        buildNodes(nodes) {
+            const newNodes = [];
 
             nodes.forEach((treeNode) => {
-                const node = new BSTreeNode({options: treeNode, treeOptions: this.options});
-                const $node= node.element;
-                $branch.append($node);
+                const $node = this.buildNode(treeNode);
+                newNodes.push($node);
             });
 
-            return $branch;
+            return newNodes;
         }
 
-        /*buildOutput(data, $parent) {
-            const nodes = this.buildNodes(data);
-
-            $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
-
-            const output = this.createNodes(nodes);
-
-            $parent.append(output);
-            this.addIcons(output);
-            $parent.data('loaded', true)
-                .toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
-        }
-
-        buildNodes(data) {
-            return data.map((node) => {
-                const nodeOptions = this.buildNode(node);
-
-                return new BSTreeNode(nodeOptions);
-            });
-        }
-
-        buildNode(node) {
-            const options = {};
-
-            for (let key in node) {
-                let keyValue = key !== 'children' ? node[key] : this.buildNodes(node.children);
-
-                if (!Array.isArray(keyValue)) {
-                    keyValue = $.trim(keyValue);
-                }
-                if (keyValue.length) {
-                    options[key] = ['leaf', 'expanded', 'checkable', 'checked'].includes(key)
-                        ? setBoolean(keyValue) : keyValue;
-                }
-            }
-
-            return options;
-        }
-
-        createNode(treeNode) {
-            const node = $('<li>');
-            const role = setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
-            const attributes = {};
-            let anchor = null;
-
-            if (role === 'leaf') {
-                attributes['class'] = ClassName.TREE_LEAF;
-            } else {
-                attributes['class'] = treeNode.expanded ? ClassName.TREE_OPEN : ClassName.TREE_CLOSED;
-            }
-
-            if (treeNode.value !== undefined) {
-                attributes['data-value'] = treeNode.value;
-            }
-
-            if (treeNode.id) {
-                attributes.id = treeNode.id;
-            }
-
-            for (let key in treeNode) {
-                if (key.indexOf('data-') !== -1) {
-                    attributes[key] = treeNode[key];
-                }
-            }
-
-            if (this.options.checkbox) {
-                attributes['data-checked'] = treeNode.checked !== undefined && treeNode.checked !== 'none'
-                    ? setBoolean(treeNode.checked) : 'none';
-                if (treeNode.checkable !== undefined) {
-                    attributes['data-checkable'] = setBoolean(treeNode.checkable);
-                }
-            }
-
-            if (treeNode.href) {
-                if (role === 'leaf') {
-                    anchor = $('<a>').attr('href', treeNode.href);
-                } else {
-                    attributes['data-href'] = treeNode.href;
-                }
-            }
-
-            const $text = $('<span>').addClass(ClassName.NODE_TEXT);
-
-            if (anchor) {
-                $text.append(anchor.html(treeNode.text));
-            } else {
-                $text.html(treeNode.text);
-            }
-
-            node.attr(attributes).append($text);
-
-            if (treeNode.children) {
-                node.append(this.createNodes(treeNode.children));
-            }
-
-            return node;
-        }
-
-        createNodes(nodes) {
-            const branch = $('ul').addClass(ClassName.TREE_BRANCH);
-
-            nodes.forEach((treeNode) => branch.append(this.createNode(treeNode)));
-
-            return branch;
-        }*/
-
-        checkLastNode() {
-            const $lastChild = $('li:last-child', this.$element);
-            if ($lastChild.css('background') !== 'transparent') {
-                $lastChild.addClass(ClassName.TREE_LAST);
-            }
+        buildNode(leaf) {
+            const node = new BSTreeNode({options: leaf, treeOptions: this.options});
+            return node.element;
         }
 
         addIcons($element=this.$element) {
-            const $li = $(`li:not(:has(>i.${ClassName.TREE_ICON}))`, $element);
-            const treeData = this.options;
-            const baseIcon = $('<i>').addClass(ClassName.TREE_ICON);
+            if (this.options.checkbox) {
+                const $anchors = $(Selector.ANYCHECK_LINKS, $element);
+                const $icon = $('<i>').addClass(ClassName.CHECKBOX_SETUP);
+                $anchors.prepend($icon);
+                const $checked = $(Selector.CHECKED, $anchors);
+                const $checkedAnchors = $checked.prev();
+                $checkedAnchors.removeClass(ClassName.TREE_UNCHECKED).addClass(ClassName.TREE_CHECKED);
 
-            $li.prepend(baseIcon);
-
-            if (treeData.checkbox) {
-                $li.each((idx, el) => this.initCheckbox(idx, el, treeData, baseIcon));
-                $(`li:last-child>span>${Selector.CHECKBOX}`, this.$element).trigger(Event.CHANGE, [true]);
-            } else if (treeData.foldertree) {
-                const newIcon = baseIcon.clone();
-                $(`span.${ClassName.NODE_TEXT}`, $li).prepend(newIcon);
-            }
-
-            const $first = $li.filter(':first');
-            if ($first.hasClass(ClassName.TREE_ROOT_HEADER)) {
-                const newIcon = $('<i>')
-                    .addClass(ClassName.TREE_HEADER_ICON)
-                    .addClass('glyphicon')
-                    .addClass($first.hasClass(ClassName.TREE_CLOSED) ? ClassName.TOGGLE_RIGHT : ClassName.TOGGLE_DOWN);
-                $first.children(`i.${ClassName.TREE_ICON}`).remove();
-                $first.children(`span.${ClassName.NODE_TEXT}`).prepend(newIcon);
-            }
-        }
-
-        initCheckbox(index, element, treeData, baseIcon) {
-            const $el = $(element);
-            const data = $el.data();
-            const thisIcon = baseIcon.clone();
-            const node = $el.children(`span.${ClassName.NODE_TEXT}`);
-
-            if (data.checked !== undefined && data.checked !== 'none') {
-                const fieldName = data.checkbox !== undefined ? data.checkbox : treeData.checkbox;
-                const field = $('<input>')
-                    .attr({
-                        type: 'checkbox',
-                        value: data.value !== undefined ? data.value : 0,
-                        name: fieldName
-                    })
-                    .prop('checked', data.checked);
-
-                thisIcon
-                    .addClass(ClassName.TREE_CHECKBOX)
-                    .addClass(data.checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                node.prepend(field).prepend(thisIcon);
-            } else {
-                $el.addClass(ClassName.TREE_NOICON);
+                const $checkAlls = $anchors.filter(Selector.CHECKALL_LINKS);
+                $checkAlls.each((index, anchor) => {
+                    const $anchor = $(anchor);
+                    const branchId = $anchor.prev().attr('href');
+                    const $branch = $(branchId, $anchor.closest('li'));
+                    this.normalizeBranch($branch);
+                });
             }
         }
 
@@ -508,7 +318,7 @@ const BSTree = (($, BSTreeNode) => {
             return this.each(function () {
                 const $this = $(this);
                 let data = $this.data(DATA_KEY);
-                const _config = $.extend(true, {}, Default, data, typeof config === 'object' && config);
+                const _config = $.extend(true, {}, Default, $this.data(), typeof config === 'object' && config);
 
                 if (!data) {
                     data = new BSTree(this, _config);
@@ -526,7 +336,7 @@ const BSTree = (($, BSTreeNode) => {
 
         getSelected() {
             const $this = this.$element;
-            const $checked = $(`${Selector.CHECKBOX}:checked`, $this);
+            const $checked = $(`${Selector.CHECKBOX_LINKS}>${Selector.CHECKED}`, $this);
             const selected = [];
 
             $checked.each((idx, el) => selected.push($(el).val()));

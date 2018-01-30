@@ -20,163 +20,267 @@
  * limitations under the License.
  * ============================================================ */
 .bstree {
+  /*ul,
+  li {
+    display:block;
+    margin:0;
+    padding:0;
+    list-style-type:none;
+  }
+
+  li {
+    min-height:18px;
+    line-height:18px;
+    white-space:nowrap;
+    margin-left:18px;
+    min-width:18px;
+  }
+
+  .bstree-real-checkbox,
+  input[type=checkbox] {
+    display: none;
+  }
+  
+  >ul>li {
+  
+    margin-left:0;
+  
+    &.bstree-root-header {
+  
+      >span.node-text {
+        display:block;
+        margin: 10px;
+        height: 1.2em;
+        font-size: 1.2em;
+        font-weight: bold;
+        
+        >i.bstree-header-icon {
+          position: relative;
+          float: right;
+        }
+      }
+    
+      &.bstree-open {
+        
+        >span.node-text {
+          border-bottom: 1px solid #eee;
+        }
+        
+        >ul {
+          padding-bottom: 10px;
+        }
+        
+      }
+      
+      &.bstree-closed {
+        >span.node-text {
+          overflow: initial !important;
+        }
+      }
+      
+    }
+    
+  }
+  
+  i.bstree-icon {
+    display:inline-block;
+    text-decoration:none;
+    width:18px;
+    height:18px;
+    margin:0;
+    padding:0;
+  }
+
+  li,
+  i.bstree-icon {
+    background: transparent url('../img/d.png') no-repeat;
+  }
+  
+  li {
+  
+    background-position: -90px 0;
+    background-repeat: repeat-y;
+    
+    &:last-child,
+    &.bstree-last {
+      background: transparent;
+    }
+    
+  }
+  
+  span.node-text {
+  
+    display:inline-block;
+    line-height:16px;
+    height:16px;
+    color:#000;
+    white-space:nowrap;
+    text-decoration:none;
+    padding: 0 2px 0 1px;
+    margin:0;
+    
+    >i.bstree-icon {
+      height:16px;
+      width:16px;
+      margin-right:3px;
+    }
+  
+    .bstree-icon { 
+      padding-right:2px;
+    }
+    
+    .bstree-unchecked { 
+      background-position:-2px -18px !important; 
+    }
+    
+    .bstree-undetermined { 
+      background-position:-20px -18px !important; 
+    }
+    
+    .bstree-checked { 
+      background-position:-38px -18px !important; 
+    }
+    
+  }
+  
+  .bstree-open {
+  
+    >ul {
+      display:block;
+    }
+  
+    >i.bstree-icon {
+      background-position: -72px 0;
+    }
+    
+    >span.node-text .bstree-icon {
+      background-position: -56px -36px; 
+    }
+    
+  }
+  
+  .bstree-closed {
+  
+    >ul {
+      display: none;
+    }
+  
+    >i.bstree-icon {
+      background-position: -54px 0;
+    }
+    
+    >i.bstree-loading {
+      background: url("../img/ajax-loader.gif") 0 0;
+    }
+    
+    >span.node-text .bstree-icon {
+      background-position:-56px -18px; 
+    }
+    
+  }
+  
+  .bstree-leaf {
+  
+    >i.bstree-icon {
+      background-position: -36px 0;
+    }
+    
+    >span.node-text .bstree-icon {
+      background-position: -74px -36px;
+    }
+    
+  }
+  
+  .bstree-noicon {
+    
+    >i.bstree-icon {
+      background-position: -36px 0;
+    }
+    
+    >span.node-text .bstree-icon {
+      background-position: -74px -54px;
+    }
+    
+  }*/
   /**
    *  ***** The New Stuff ***
    */
+  /*a.node-text {
+    outline: none;
+    display: block;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: inherit;
+      text-decoration: none;
+    }
+    &:before {
+      position: relative;
+      display: inline-block;
+      height: 16px;
+      width: 16px;
+      margin-right:3px;
+      content: ' ';
+      background: transparent url('../img/d.png') no-repeat;
+    }
+  }*/
   /**
    *  ***** End of The New Stuff ***
    */
 }
-.bstree ul,
-.bstree li {
-  display: block;
-  margin: 0;
-  padding: 0;
+.bstree ul {
+  -webkit-padding-start: 0;
+}
+.bstree ul li {
   list-style-type: none;
-}
-.bstree li {
-  min-height: 18px;
-  line-height: 18px;
+  margin-left: 1.4em;
+  min-width: 1.4em;
+  min-height: 1.4em;
+  line-height: 1.4em;
   white-space: nowrap;
-  margin-left: 18px;
-  min-width: 18px;
 }
-.bstree .bstree-real-checkbox,
-.bstree input[type=checkbox] {
+.bstree ul li .node-text {
+  display: block;
+}
+.bstree ul li .node-text:hover {
+  background-color: #eeeeee;
+}
+.bstree ul li a.node-text,
+.bstree ul li a.toggle-link,
+.bstree ul li a.bstree-check,
+.bstree ul li a.bstree-check-all {
+  outline: none;
+}
+.bstree ul li a.node-text:link,
+.bstree ul li a.toggle-link:link,
+.bstree ul li a.bstree-check:link,
+.bstree ul li a.bstree-check-all:link,
+.bstree ul li a.node-text:visited,
+.bstree ul li a.toggle-link:visited,
+.bstree ul li a.bstree-check:visited,
+.bstree ul li a.bstree-check-all:visited,
+.bstree ul li a.node-text:hover,
+.bstree ul li a.toggle-link:hover,
+.bstree ul li a.bstree-check:hover,
+.bstree ul li a.bstree-check-all:hover,
+.bstree ul li a.node-text:active,
+.bstree ul li a.toggle-link:active,
+.bstree ul li a.bstree-check:active,
+.bstree ul li a.bstree-check-all:active {
+  color: inherit;
+  text-decoration: none;
+}
+.bstree ul li a.bstree-check input[type=checkbox],
+.bstree ul li a.bstree-check-all input[type=checkbox] {
   display: none;
 }
-.bstree > ul > li {
-  margin-left: 0;
+.bstree ul li .bstree-icon {
+  margin-left: -1.4em;
 }
-.bstree > ul > li.bstree-root-header > span.node-text {
-  display: block;
+.bstree ul li.bstree-root-header > .node-text {
   margin: 10px;
   height: 1.2em;
   font-size: 1.2em;
   font-weight: bold;
-  /*background-color: #999;*/
-}
-.bstree > ul > li.bstree-root-header > span.node-text > i.bstree-header-icon {
-  position: relative;
-  float: right;
-}
-.bstree > ul > li.bstree-root-header.bstree-open > span.node-text {
-  border-bottom: 1px solid #eee;
-}
-.bstree > ul > li.bstree-root-header.bstree-open > ul {
-  padding-bottom: 10px;
-}
-.bstree > ul > li.bstree-root-header.bstree-closed > span.node-text {
-  overflow: initial !important;
-}
-.bstree i.bstree-icon {
-  display: inline-block;
-  text-decoration: none;
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  padding: 0;
-}
-.bstree li,
-.bstree i.bstree-icon {
-  background: transparent url('../img/d.png') no-repeat;
-}
-.bstree li {
-  background-position: -90px 0;
-  background-repeat: repeat-y;
-}
-.bstree li:last-child,
-.bstree li.bstree-last {
-  background: transparent;
-}
-.bstree span.node-text {
-  display: inline-block;
-  line-height: 16px;
-  height: 16px;
-  color: #000;
-  white-space: nowrap;
-  text-decoration: none;
-  padding: 0 2px 0 1px;
-  margin: 0;
-}
-.bstree span.node-text > i.bstree-icon {
-  height: 16px;
-  width: 16px;
-  margin-right: 3px;
-}
-.bstree span.node-text .bstree-icon {
-  padding-right: 2px;
-}
-.bstree span.node-text .bstree-unchecked {
-  background-position: -2px -18px !important;
-}
-.bstree span.node-text .bstree-undetermined {
-  background-position: -20px -18px !important;
-}
-.bstree span.node-text .bstree-checked {
-  background-position: -38px -18px !important;
-}
-.bstree .bstree-open > ul {
-  display: block;
-}
-.bstree .bstree-open > i.bstree-icon {
-  background-position: -72px 0;
-}
-.bstree .bstree-open > span.node-text .bstree-icon {
-  background-position: -56px -36px;
-}
-.bstree .bstree-closed > ul {
-  display: none;
-}
-.bstree .bstree-closed > i.bstree-icon {
-  background-position: -54px 0;
-}
-.bstree .bstree-closed > i.bstree-loading {
-  background: url("../img/ajax-loader.gif") 0 0;
-}
-.bstree .bstree-closed > span.node-text .bstree-icon {
-  background-position: -56px -18px;
-}
-.bstree .bstree-leaf > i.bstree-icon {
-  background-position: -36px 0;
-}
-.bstree .bstree-leaf > span.node-text .bstree-icon {
-  background-position: -74px -36px;
-}
-.bstree .bstree-noicon > i.bstree-icon {
-  background-position: -36px 0;
-}
-.bstree .bstree-noicon > span.node-text .bstree-icon {
-  background-position: -74px -54px;
-}
-.bstree a.node-text {
-  outline: none;
-  display: block;
-}
-.bstree a.node-text:link,
-.bstree a.node-text:visited,
-.bstree a.node-text:hover,
-.bstree a.node-text:active {
-  color: inherit;
-  text-decoration: none;
-}
-.bstree a.node-text:before {
-  position: relative;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-  margin-right: 3px;
-  content: ' ';
-  background: transparent url('../img/d.png') no-repeat;
-}
-.bstree li.bstree-closed > a.node-text:before {
-  background-position: -54px 0;
-}
-.bstree li.bstree-open > a.node-text:before {
-  background-position: -72px 0;
-}
-.bstree .bstree-hovered {
-  background: #e7f4f9;
-  border: 1px solid #d8f0fa;
-  padding: 0 2px 0 1px;
 }

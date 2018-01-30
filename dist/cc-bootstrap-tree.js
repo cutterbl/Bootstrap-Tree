@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,12 +73,50 @@ module.exports = jQuery;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(2);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = setBoolean;
+function setBoolean(value) {
+    if (!value) {
+        return false;
+    }
+
+    if (typeof value === 'string') {
+        value = value.trim();
+
+        if (!isNaN(value)) {
+            return Boolean(parseFloat(value));
+        }
+
+        switch (value) {
+            case 'true':
+            case 'yes':
+                value = true;
+                break;
+            case 'false':
+            case 'no':
+                value = false;
+                break;
+        }
+    }
+
+    return Boolean(value);
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
 module.exports = __webpack_require__(6);
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -92,7 +130,7 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _BSTree = __webpack_require__(3);
+var _BSTree = __webpack_require__(4);
 
 var _BSTree2 = _interopRequireDefault(_BSTree);
 
@@ -140,7 +178,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _BSTree2.default;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,9 +216,13 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _BSTreeNode = __webpack_require__(4);
+var _BSTreeNode = __webpack_require__(5);
 
 var _BSTreeNode2 = _interopRequireDefault(_BSTreeNode);
+
+var _setBoolean = __webpack_require__(1);
+
+var _setBoolean2 = _interopRequireDefault(_setBoolean);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -197,12 +239,13 @@ var BSTree = function ($, BSTreeNode) {
     var VERSION = '0.0.5';
     var DATA_KEY = 'bs.tree';
     var EVENT_KEY = '.' + DATA_KEY;
+    var COLLAPSE_EVENT_KEY = '.bs.collapse';
     //const DATA_API_KEY = '.data-api';
     var JQUERY_NO_CONFLICT = $.fn[NAME];
 
     var Default = {
+        base: '',
         params: {
-            base: '',
             request: {
                 dataType: 'json',
                 type: 'POST',
@@ -214,14 +257,31 @@ var BSTree = function ($, BSTreeNode) {
     };
 
     var Event = {
-        CLICK: 'click' + EVENT_KEY,
-        MOUSEENTER: 'mouseenter' + EVENT_KEY,
-        MOUSELEAVE: 'mouseleave' + EVENT_KEY,
-        CHANGE: 'change' + EVENT_KEY
+        CHECKBOX_CLICK: 'click.checkbox' + EVENT_KEY,
+        CHECKBOX_CHANGE: 'change.checkbox' + EVENT_KEY,
+        CHECKALL_CHANGE: 'change.checkall' + EVENT_KEY,
+        COLLAPSE_SHOW: 'show' + COLLAPSE_EVENT_KEY,
+        COLLAPSE_HIDE: 'hide' + COLLAPSE_EVENT_KEY
     };
 
     var ClassName = {
+        FA_ADDER: 'fa fa-fw',
         TREE_ICON: NAME + '-icon',
+        NODE_TEXT: 'node-text',
+        TOGGLE_EXPAND: 'fa-chevron-right',
+        TOGGLE_COLLAPSE: 'fa-chevron-down',
+        TREE_LOADING: 'fa-spinner fa-spin',
+        TREE_OPEN: 'fa-folder-open',
+        TREE_CLOSED: 'fa-folder',
+        TREE_CHECK: NAME + '-check',
+        TREE_CHECKALL: NAME + '-check-all',
+        TREE_CHECKBOX: NAME + '-checkbox',
+        TREE_UNCHECKED: 'fa-square-o',
+        TREE_CHECKED: 'fa-check-square',
+        TREE_PARTIAL: 'fa-check-square-o',
+        ALL_CHECK_STATES: 'fa-square-o fa-check-square fa-check-square-o',
+        CHECKBOX_SETUP: 'fa fa-fw ' + NAME + '-checkbox fa-square-o',
+
         TREE_NOICON: NAME + '-noicon',
         TREE_LEAF: NAME + '-leaf',
         TREE_BRANCH: NAME + '-branch',
@@ -229,21 +289,23 @@ var BSTree = function ($, BSTreeNode) {
         TREE_LAST: NAME + '-last',
         TREE_HEADER_ICON: NAME + '-header-icon',
         TREE_ROOT_HEADER: NAME + '-root-header',
-        TREE_OPEN: NAME + '-open',
-        TREE_CLOSED: NAME + '-closed',
-        TREE_CHECKBOX: NAME + '-checkbox',
-        TREE_CHECKED: NAME + '-checked',
-        TREE_LOADING: NAME + '-loading',
-        TREE_HOVERED: NAME + '-hovered',
-        TREE_UNCHECKED: NAME + '-unchecked',
         TREE_UNDETERMINED: NAME + '-undetermined',
-        TOGGLE_RIGHT: 'glyphicon-chevron-right',
-        TOGGLE_DOWN: 'glyphicon-chevron-down',
-        NODE_TEXT: 'node-text'
+        TOGGLE_RIGHT: 'fa-chevron-right',
+        TOGGLE_DOWN: 'fa-chevron-down'
     };
 
     var Selector = {
-        CHECKBOX: 'input:checkbox'
+        TREE_ICON: '.' + ClassName.TREE_ICON,
+        COLLAPSE: '.collapse',
+        CHECKBOX: 'input:checkbox',
+        CHECKED: 'input:checked',
+        CHECKBOX_LINKS: '.' + ClassName.TREE_CHECK,
+        CHECKALL_LINKS: '.' + ClassName.TREE_CHECKALL,
+        ALLCHECK_LINKS: '.' + ClassName.TREE_CHECK + ', .' + ClassName.TREE_CHECKALL,
+        ANYCHECK_LINKS: '[class^="' + ClassName.TREE_CHECK + '"]',
+        CHECKBOX_INPUTS: '.' + ClassName.TREE_CHECK + '>input',
+        ALLCHECK_INPUTS: '.' + ClassName.TREE_CHECKALL + '>input',
+        CHECKBOX_ICON: '.' + ClassName.TREE_CHECKBOX
     };
 
     var BSTree = function () {
@@ -253,6 +315,8 @@ var BSTree = function ($, BSTreeNode) {
             this.type = NAME;
             this.$element = $(element);
             this.options = $.extend(true, {}, $.fn[this.type].defaults, this.$element.data(), options);
+            this.expandIcon = this.options.foldertree ? ClassName.TREE_CLOSED : ClassName.TOGGLE_EXPAND;
+            this.collapseIcon = this.options.foldertree ? ClassName.TREE_OPEN : ClassName.TOGGLE_COLLAPSE;
             this.initialize();
         }
 
@@ -268,199 +332,139 @@ var BSTree = function ($, BSTreeNode) {
         }, {
             key: 'initialize',
             value: function initialize() {
-                this.checkLastNode();
+                this.addIcons();
 
-                this.setupEventHandlers();
-
-                //this.addIcons();
+                this.createEventHandlers();
             }
         }, {
-            key: 'setupEventHandlers',
-            value: function setupEventHandlers() {
+            key: 'createEventHandlers',
+            value: function createEventHandlers() {
                 var _this = this;
 
-                this.$element
-                /* on click for tree icons */
-                //.on(`${Event.CLICK}.coll-icon`, `li>i.${ClassName.TREE_ICON}`, (event) => this.treeIconClick(event))
-                /* on click for the tree header icon */
-                //.on(`${Event.CLICK}.coll-icon`, `li>span.${ClassName.NODE_TEXT}>i.${ClassName.TREE_HEADER_ICON}`,
-                //    (event) => this.treeHeaderIconClick(event))
-                /* mouseenter and mouseleave for hover state on a node */
-                .on('' + Event.MOUSEENTER, '.' + ClassName.NODE_TEXT + ' ' + Event.MOUSELEAVE, '.' + ClassName.NODE_TEXT, function (event) {
-                    return _this.hoverNode(event);
-                })
-                /* on change of checkboxes */
-                .on(Event.CHANGE + '.checkbox', Selector.CHECKBOX, function (event) {
-                    return _this.setNewState(event);
-                })
-                /* on click of checkboxes */
-                //.on(`${Event.CLICK}.checkbox`, `.${ClassName.TREE_CHECKBOX}`, (event) => this.checkboxHandler(event))
-                .on('show.bs.collapse', '.cc-bstree-branch', function (event) {
-                    event.stopPropagation();
-                    var $el = $(event.currentTarget);
-                    $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
-                }).on('hide.bs.collapse', '.cc-bstree-branch', function (event) {
-                    event.stopPropagation();
-                    var $el = $(event.currentTarget);
-                    $el.parent().toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
+                this.$element.on(Event.COLLAPSE_SHOW, Selector.COLLAPSE, function (event) {
+                    return _this.expandTree(event);
+                }).on(Event.COLLAPSE_HIDE, Selector.COLLAPSE, function (event) {
+                    return _this.collapseTree(event);
+                }).on(Event.CHECKBOX_CLICK, Selector.ALLCHECK_LINKS, function (event) {
+                    return _this.checkClickHandler(event);
+                }).on(Event.CHECKBOX_CHANGE, Selector.CHECKBOX_INPUTS, function (event) {
+                    return _this.checkboxChangeHandler(event);
+                }).on(Event.CHECKALL_CHANGE, Selector.ALLCHECK_INPUTS, function (event) {
+                    return _this.checkallChangeHandler(event);
                 });
             }
         }, {
-            key: 'treeIconClick',
-            value: function treeIconClick(event) {
-                var $this = $(event.currentTarget);
-                var $parent = $this.parent();
-                var data = $parent.data();
-
-                if (!$parent.hasClass(ClassName.TREE_LEAF)) {
-                    if (!$.isEmptyObject(data)) {
-                        this.processNode($this, $parent, data);
-                    } else {
-                        $parent.toggleClass(ClassName.TREE_OPEN + ' ' + ClassName.TREE_CLOSED);
+            key: 'checkClickHandler',
+            value: function checkClickHandler(event) {
+                event.preventDefault();
+                var $target = $(event.currentTarget);
+                var href = $target.attr('href');
+                var $input = $(href);
+                var checked = $input.prop('checked');
+                this.toggleCheckboxValue($input, !checked);
+                $input.change();
+                // now normalize the branch
+                var $branch = $target.closest('ul');
+                this.normalizeBranch($branch);
+            }
+        }, {
+            key: 'checkboxChangeHandler',
+            value: function checkboxChangeHandler(event) {
+                event.preventDefault();
+                var $target = $(event.currentTarget);
+                var checked = $target.prop('checked');
+                var $parent = $target.parent();
+                var $icon = $(Selector.CHECKBOX_ICON, $parent);
+                this.toggleCheckMark($icon, checked);
+            }
+        }, {
+            key: 'checkallChangeHandler',
+            value: function checkallChangeHandler(event) {
+                event.preventDefault();
+                var $target = $(event.currentTarget);
+                var checked = $target.prop('checked');
+                var $parent = $target.parent();
+                var $icon = $(Selector.CHECKBOX_ICON, $parent);
+                // toggle the checkmark of this checkall
+                this.toggleCheckMark($icon, checked);
+                // find the 'branch'
+                var branchId = $parent.prev().attr('href');
+                var $branch = $(branchId, $parent.closest('li'));
+                this.toggleAll($branch, checked);
+            }
+        }, {
+            key: 'toggleCheckMark',
+            value: function toggleCheckMark($icon, value) {
+                $icon.removeClass(ClassName.ALL_CHECK_STATES).addClass(value ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
+            }
+        }, {
+            key: 'toggleCheckboxValue',
+            value: function toggleCheckboxValue($input, value) {
+                $input.prop('checked', value);
+            }
+        }, {
+            key: 'toggleAll',
+            value: function toggleAll($branch, value) {
+                var $inputs = $(Selector.CHECKBOX, $branch);
+                $inputs.prop('checked', value).change();
+            }
+        }, {
+            key: 'normalizeBranch',
+            value: function normalizeBranch($branch) {
+                var $checkAll = $(Selector.CHECKALL_LINKS, $branch.prev());
+                var $inputs = $(Selector.CHECKBOX, $branch);
+                if ($inputs.length) {
+                    var $checked = $inputs.filter(':checked');
+                    var iconClass = ClassName.TREE_UNCHECKED;
+                    var value = false;
+                    if ($inputs.length === $checked.length) {
+                        iconClass = ClassName.TREE_CHECKED;
+                        value = true;
+                    } else if ($checked.length < $inputs.length) {
+                        iconClass = ClassName.TREE_PARTIAL;
                     }
+                    var $input = $(Selector.CHECKBOX, $checkAll);
+                    this.toggleCheckboxValue($input, value);
+                    $(Selector.CHECKBOX_ICON, $checkAll).removeClass(ClassName.ALL_CHECK_STATES).addClass(iconClass);
                 }
             }
         }, {
-            key: 'treeHeaderIconClick',
-            value: function treeHeaderIconClick(event) {
-                var $this = $(event.currentTarget);
-                var $parent = $this.parent();
-                var data = $parent.data();
-
-                if (!$parent.hasClass(ClassName.TREE_LEAF)) {
-                    if (!$.isEmptyObject(data)) {
-                        this.processNode($this, $parent, data);
-                    } else {
-                        $parent.parent().toggleClass(ClassName.TREE_OPEN + ' ' + ClassName.TREE_CLOSED);
-                        $this.toggleClass(ClassName.TOGGLE_RIGHT + ' ' + ClassName.TOGGLE_DOWN);
-                    }
-                }
-            }
-        }, {
-            key: 'hoverNode',
-            value: function hoverNode(event) {
-                $(event.currentTarget).toggleClass(ClassName.TREE_HOVERED);
-            }
-        }, {
-            key: 'setNewState',
-            value: function setNewState(event) {
-                var ctrlKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-                var checked = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-                var $this = $(event.currentTarget);
-                var $parentLi = $this.closest('li');
-                var $leaves = $('ul li', $parentLi);
-                var $icon = $this.prev('i[class~=' + ClassName.TREE_CHECKBOX + ']');
-                checked = checked !== null ? checked : $this.prop('checked');
-
-                $icon.removeClass(ClassName.TREE_CHECKED + ' ' + ClassName.TREE_UNCHECKED + ' ' + ClassName.TREE_UNDETERMINED);
-
-                if ($leaves) {
-                    $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                } else {
-                    var $leafCheckboxes = $(Selector.CHECKBOX, $leaves);
-                    var $leafIcons = $('i[class~=' + ClassName.TREE_CHECKBOX + ']', $leaves);
-
-                    if (!ctrlKey) {
-                        $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                        $leafCheckboxes.prop('checked', checked);
-                        $leafCheckboxes.each(function (idx, el) {
-                            var $li = $(el).closest('li');
-                            var leafData = $li.data();
-
-                            if (leafData.checked !== checked) {
-                                $li.data('checked', checked);
-                            }
-                        });
-                        $leafIcons.removeClass(ClassName.TREE_CHECKED).removeClass(ClassName.TREE_UNCHECKED).removeClass(ClassName.TREE_UNDETERMINED);
-                    } else {
-                        var $selectedChild = $.grep($leafCheckboxes, function (el) {
-                            return $(el).prop('checked');
-                        });
-
-                        if ($selectedChild) {
-                            $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNDETERMINED);
-                        } else {
-                            $icon.addClass(checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                        }
-                    }
-                }
-
-                //this.checkParent($parentLi);
-                console.log('event data', event.data); // eslint-disable-line no-console
-            }
-        }, {
-            key: 'checkParent',
-            value: function checkParent($node) {
-                var $parent = $node.closest('ul').parent('li');
-                var $span = $parent.children('span');
-                var $childCheckboxes = $('ul li>span>' + Selector.CHECKBOX, $parent);
-                var $checkedCheckboxes = $childCheckboxes.filter(':checked');
-                var state = 'checked';
-
-                if (!$parent) {
-                    return;
-                }
-
-                if (!$checkedCheckboxes) {
-                    state = 'unchecked';
-                } else if ($checkedCheckboxes.length < $childCheckboxes.length) {
-                    state = 'undetermined';
-                }
-
-                var $spanChildren = $span.children(Selector.CHECKBOX);
-                var checked = state === 'checked';
-
-                $spanChildren.prop('checked', checked);
-                $spanChildren.each(function (idx, el) {
-                    var $li = $(el).closest('li');
-                    var leafData = $li.data();
-
-                    if (leafData.checked !== checked) {
-                        $li.data('checked', checked);
-                    }
-                });
-
-                $('i.' + ClassName.TREE_CHECKBOX, $span).removeClass(ClassName.TREE_CHECKED + ' ' + ClassName.TREE_UNCHECKED + ' ' + ClassName.TREE_UNDETERMINED).addClass(ClassName['TREE_' + state.toUpperCase()]);
-                // Do we open, or close the branch?
-                $parent.removeClass(ClassName.TREE_OPEN + ' ' + ClassName.TREE_CLOSED).addClass(state === 'checked' ? ClassName.TREE_CLOSED : ClassName.TREE_OPEN);
-                this.checkParent($parent);
-            }
-        }, {
-            key: 'checkboxHandler',
-            value: function checkboxHandler(event) {
-                var $this = $(event.currentTarget);
-                var $parentLi = $this.closest('li');
-                //const parentData = $parentLi.data();
-                var checkbox = $this.next(Selector.CHECKBOX);
-                var checked = checkbox.prop('checked');
-
-                $parentLi.data('checked', !checked);
-                checkbox.prop('checked', !checked).trigger(Event.CHANGE, [event.ctrlKey, !checked]);
-            }
-        }, {
-            key: 'processNode',
-            value: function processNode($node, $parent, data) {
-                data.loaded = data.loaded !== undefined ? data.loaded : false;
-                data.reload = data.reload !== undefined ? data.reload : false;
-                data.href = data.href !== undefined ? data.href : null;
-
-                if ($parent.hasClass(ClassName.TREE_CLOSED) && data.href) {
-                    if (!data.loaded || data.reload) {
-                        this.getRemoteData($node, $parent, data).always(function () {
-                            return $parent.toggleClass(ClassName.TREE_CLOSED + ' ' + ClassName.TREE_OPEN);
-                        });
-                    }
-                }
-            }
-        }, {
-            key: 'getRemoteData',
-            value: function getRemoteData($node, $parent, data) {
+            key: 'expandTree',
+            value: function expandTree(event) {
                 var _this2 = this;
 
+                event.stopPropagation();
+                var $el = $(event.currentTarget);
+                var data = $el.data();
+                var $icon = $(Selector.TREE_ICON, $el.prev());
+                $icon.removeClass(this.expandIcon);
+                if (!data.href || (0, _setBoolean2.default)(data.loaded)) {
+                    $icon.addClass(this.collapseIcon);
+                }
+                if (data.href && ((0, _setBoolean2.default)(data.reload) || !(0, _setBoolean2.default)(data.loaded))) {
+                    $icon.addClass(ClassName.TREE_LOADING);
+                    this.getData($el).always(function () {
+                        return $icon.removeClass(ClassName.TREE_LOADING).addClass(_this2.collapseIcon);
+                    });
+                }
+            }
+        }, {
+            key: 'collapseTree',
+            value: function collapseTree(event) {
+                event.stopPropagation();
+                var $el = $(event.currentTarget);
+                var $icon = $(Selector.TREE_ICON, $el.prev());
+                $icon.removeClass(this.collapseIcon).addClass(this.expandIcon);
+            }
+        }, {
+            key: 'getData',
+            value: function getData($node) {
+                var _this3 = this;
+
+                var data = $node.data();
                 var opts = $.extend(true, {}, this.options.params);
                 var requestParams = {
-                    url: '' + opts.base + data.href,
+                    url: '' + this.options.base + data.href,
                     context: $node,
                     data: $.extend(true, {}, data)
                 };
@@ -474,194 +478,74 @@ var BSTree = function ($, BSTreeNode) {
 
                 requestParams = $.extend(true, opts.request, requestParams);
 
-                var $children = $parent.children('i.' + ClassName.TREE_ICON);
-
-                $children.addClass(ClassName.TREE_LOADING);
-
                 return $.ajax(requestParams).done(function (data, status, xhr) {
-                    _this2.buildOutput(data, $parent);
-                    return _this2.options.params.request.success(data, status, xhr);
+                    _this3.buildBranch($node, data);
+                    $node.data('loaded', true);
+                    return _this3.options.params.request.success(data, status, xhr);
                 }).fail(this.options.params.request.error).always(function (data, status) {
-                    $children.removeClass(ClassName.TREE_LOADING);
-                    return _this2.options.params.request.complete(data, status);
+                    return _this3.options.params.request.complete(data, status);
                 });
             }
         }, {
-            key: 'buildOutput',
-            value: function buildOutput(data, $parent) {
+            key: 'buildBranch',
+            value: function buildBranch($branch, data) {
                 if (data && Array.isArray(data) && data.length) {
-                    $parent.children('ul.' + ClassName.TREE_BRANCH).remove(); // remove the old one, if replacing
+                    $branch.empty(); // this is in case it is being 'reloaded', otherwise it's already empty
 
-                    var $branch = this.createNodes(data);
+                    var nodes = this.buildNodes(data);
 
-                    $parent.append($branch);
-                    //this.addIcons($branch);
-                    $parent.data('loaded', true);
+                    $branch.append(nodes);
                 }
             }
         }, {
-            key: 'createNodes',
-            value: function createNodes(nodes) {
-                var _this3 = this;
+            key: 'buildNodes',
+            value: function buildNodes(nodes) {
+                var _this4 = this;
 
-                var $branch = $('<ul>').addClass(ClassName.TREE_BRANCH);
+                var newNodes = [];
 
                 nodes.forEach(function (treeNode) {
-                    var node = new BSTreeNode({ options: treeNode, treeOptions: _this3.options });
-                    var $node = node.element;
-                    $branch.append($node);
+                    var $node = _this4.buildNode(treeNode);
+                    newNodes.push($node);
                 });
 
-                return $branch;
+                return newNodes;
             }
-
-            /*buildOutput(data, $parent) {
-                const nodes = this.buildNodes(data);
-                 $parent.children(`ul.${ClassName.TREE_BRANCH}`).remove(); // remove the old one, if replacing
-                 const output = this.createNodes(nodes);
-                 $parent.append(output);
-                this.addIcons(output);
-                $parent.data('loaded', true)
-                    .toggleClass(`${ClassName.TREE_CLOSED} ${ClassName.TREE_OPEN}`);
-            }
-             buildNodes(data) {
-                return data.map((node) => {
-                    const nodeOptions = this.buildNode(node);
-                     return new BSTreeNode(nodeOptions);
-                });
-            }
-             buildNode(node) {
-                const options = {};
-                 for (let key in node) {
-                    let keyValue = key !== 'children' ? node[key] : this.buildNodes(node.children);
-                     if (!Array.isArray(keyValue)) {
-                        keyValue = $.trim(keyValue);
-                    }
-                    if (keyValue.length) {
-                        options[key] = ['leaf', 'expanded', 'checkable', 'checked'].includes(key)
-                            ? setBoolean(keyValue) : keyValue;
-                    }
-                }
-                 return options;
-            }
-             createNode(treeNode) {
-                const node = $('<li>');
-                const role = setBoolean(treeNode.leaf) ? 'leaf' : 'branch';
-                const attributes = {};
-                let anchor = null;
-                 if (role === 'leaf') {
-                    attributes['class'] = ClassName.TREE_LEAF;
-                } else {
-                    attributes['class'] = treeNode.expanded ? ClassName.TREE_OPEN : ClassName.TREE_CLOSED;
-                }
-                 if (treeNode.value !== undefined) {
-                    attributes['data-value'] = treeNode.value;
-                }
-                 if (treeNode.id) {
-                    attributes.id = treeNode.id;
-                }
-                 for (let key in treeNode) {
-                    if (key.indexOf('data-') !== -1) {
-                        attributes[key] = treeNode[key];
-                    }
-                }
-                 if (this.options.checkbox) {
-                    attributes['data-checked'] = treeNode.checked !== undefined && treeNode.checked !== 'none'
-                        ? setBoolean(treeNode.checked) : 'none';
-                    if (treeNode.checkable !== undefined) {
-                        attributes['data-checkable'] = setBoolean(treeNode.checkable);
-                    }
-                }
-                 if (treeNode.href) {
-                    if (role === 'leaf') {
-                        anchor = $('<a>').attr('href', treeNode.href);
-                    } else {
-                        attributes['data-href'] = treeNode.href;
-                    }
-                }
-                 const $text = $('<span>').addClass(ClassName.NODE_TEXT);
-                 if (anchor) {
-                    $text.append(anchor.html(treeNode.text));
-                } else {
-                    $text.html(treeNode.text);
-                }
-                 node.attr(attributes).append($text);
-                 if (treeNode.children) {
-                    node.append(this.createNodes(treeNode.children));
-                }
-                 return node;
-            }
-             createNodes(nodes) {
-                const branch = $('ul').addClass(ClassName.TREE_BRANCH);
-                 nodes.forEach((treeNode) => branch.append(this.createNode(treeNode)));
-                 return branch;
-            }*/
-
         }, {
-            key: 'checkLastNode',
-            value: function checkLastNode() {
-                var $lastChild = $('li:last-child', this.$element);
-                if ($lastChild.css('background') !== 'transparent') {
-                    $lastChild.addClass(ClassName.TREE_LAST);
-                }
+            key: 'buildNode',
+            value: function buildNode(leaf) {
+                var node = new BSTreeNode({ options: leaf, treeOptions: this.options });
+                return node.element;
             }
         }, {
             key: 'addIcons',
             value: function addIcons() {
-                var _this4 = this;
+                var _this5 = this;
 
                 var $element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$element;
 
-                var $li = $('li:not(:has(>i.' + ClassName.TREE_ICON + '))', $element);
-                var treeData = this.options;
-                var baseIcon = $('<i>').addClass(ClassName.TREE_ICON);
+                if (this.options.checkbox) {
+                    var $anchors = $(Selector.ANYCHECK_LINKS, $element);
+                    var $icon = $('<i>').addClass(ClassName.CHECKBOX_SETUP);
+                    $anchors.prepend($icon);
+                    var $checked = $(Selector.CHECKED, $anchors);
+                    var $checkedAnchors = $checked.prev();
+                    $checkedAnchors.removeClass(ClassName.TREE_UNCHECKED).addClass(ClassName.TREE_CHECKED);
 
-                $li.prepend(baseIcon);
-
-                if (treeData.checkbox) {
-                    $li.each(function (idx, el) {
-                        return _this4.initCheckbox(idx, el, treeData, baseIcon);
+                    var $checkAlls = $anchors.filter(Selector.CHECKALL_LINKS);
+                    $checkAlls.each(function (index, anchor) {
+                        var $anchor = $(anchor);
+                        var branchId = $anchor.prev().attr('href');
+                        var $branch = $(branchId, $anchor.closest('li'));
+                        _this5.normalizeBranch($branch);
                     });
-                    $('li:last-child>span>' + Selector.CHECKBOX, this.$element).trigger(Event.CHANGE, [true]);
-                } else if (treeData.foldertree) {
-                    var newIcon = baseIcon.clone();
-                    $('span.' + ClassName.NODE_TEXT, $li).prepend(newIcon);
-                }
-
-                var $first = $li.filter(':first');
-                if ($first.hasClass(ClassName.TREE_ROOT_HEADER)) {
-                    var _newIcon = $('<i>').addClass(ClassName.TREE_HEADER_ICON).addClass('glyphicon').addClass($first.hasClass(ClassName.TREE_CLOSED) ? ClassName.TOGGLE_RIGHT : ClassName.TOGGLE_DOWN);
-                    $first.children('i.' + ClassName.TREE_ICON).remove();
-                    $first.children('span.' + ClassName.NODE_TEXT).prepend(_newIcon);
-                }
-            }
-        }, {
-            key: 'initCheckbox',
-            value: function initCheckbox(index, element, treeData, baseIcon) {
-                var $el = $(element);
-                var data = $el.data();
-                var thisIcon = baseIcon.clone();
-                var node = $el.children('span.' + ClassName.NODE_TEXT);
-
-                if (data.checked !== undefined && data.checked !== 'none') {
-                    var fieldName = data.checkbox !== undefined ? data.checkbox : treeData.checkbox;
-                    var field = $('<input>').attr({
-                        type: 'checkbox',
-                        value: data.value !== undefined ? data.value : 0,
-                        name: fieldName
-                    }).prop('checked', data.checked);
-
-                    thisIcon.addClass(ClassName.TREE_CHECKBOX).addClass(data.checked ? ClassName.TREE_CHECKED : ClassName.TREE_UNCHECKED);
-                    node.prepend(field).prepend(thisIcon);
-                } else {
-                    $el.addClass(ClassName.TREE_NOICON);
                 }
             }
         }, {
             key: 'getSelected',
             value: function getSelected() {
                 var $this = this.$element;
-                var $checked = $(Selector.CHECKBOX + ':checked', $this);
+                var $checked = $(Selector.CHECKBOX_LINKS + '>' + Selector.CHECKED, $this);
                 var selected = [];
 
                 $checked.each(function (idx, el) {
@@ -686,7 +570,7 @@ var BSTree = function ($, BSTreeNode) {
                 return this.each(function () {
                     var $this = $(this);
                     var data = $this.data(DATA_KEY);
-                    var _config = $.extend(true, {}, Default, data, (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
+                    var _config = $.extend(true, {}, Default, $this.data(), (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
 
                     if (!data) {
                         data = new BSTree(this, _config);
@@ -720,7 +604,7 @@ var BSTree = function ($, BSTreeNode) {
 exports.default = BSTree;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -756,7 +640,7 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _setBoolean = __webpack_require__(5);
+var _setBoolean = __webpack_require__(1);
 
 var _setBoolean2 = _interopRequireDefault(_setBoolean);
 
@@ -798,6 +682,11 @@ const Event = {
 
 var ClassName = {
     TREE_ICON: NAME + '-icon',
+    NODE_TEXT: 'node-text',
+    TOGGLE_EXPAND: 'fa-chevron-right',
+    TOGGLE_COLLAPSE: 'fa-chevron-down',
+    TREE_LOADING: 'fa-spinner fa-spin',
+
     TREE_NOICON: NAME + '-noicon',
     TREE_LEAF: NAME + '-leaf',
     TREE_BRANCH: NAME + '-branch',
@@ -809,13 +698,10 @@ var ClassName = {
     TREE_CLOSED: NAME + '-closed',
     TREE_CHECKBOX: NAME + '-checkbox',
     TREE_CHECKED: NAME + '-checked',
-    TREE_LOADING: NAME + '-loading',
-    TREE_HOVERED: NAME + '-hovered',
     TREE_UNCHECKED: NAME + '-unchecked',
     TREE_UNDETERMINED: NAME + '-undetermined',
-    TOGGLE_RIGHT: 'glyphicon-chevron-right',
-    TOGGLE_DOWN: 'glyphicon-chevron-down',
-    NODE_TEXT: 'node-text'
+    TOGGLE_RIGHT: 'fa-chevron-right',
+    TOGGLE_DOWN: 'fa-chevron-down'
 };
 
 /*const Selector = {
@@ -997,44 +883,6 @@ var BSTreeNode = function () {
 }();
 
 exports.default = BSTreeNode;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = setBoolean;
-function setBoolean(value) {
-    if (!value) {
-        return false;
-    }
-
-    if (typeof value === 'string') {
-        value = value.trim();
-
-        if (!isNaN(value)) {
-            return Boolean(parseFloat(value));
-        }
-
-        switch (value) {
-            case 'true':
-            case 'yes':
-                value = true;
-                break;
-            case 'false':
-            case 'no':
-                value = false;
-                break;
-        }
-    }
-
-    return Boolean(value);
-}
 
 /***/ }),
 /* 6 */

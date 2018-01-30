@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="../node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
         <link href="../dist/css/cc-bootstrap-tree-extra.min.css" rel="stylesheet">
         <style>
           body {
@@ -43,31 +44,32 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="well bstree">
+                    <div class="well bstree" data-base="/Bootstrap-Tree/example/">
                       <ul>
-                        <li class="bstree-open">
-                          <a href="#children_1" data-toggle="collapse" class="node-text">This is my text</a>
-                          <ul class="cc-bstree-branch collapse in" id="children_1">
-                            <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-closed">
-                              <a class="node-text" data-toggle="collapse" href="#children_2">This is my second leaf</a>
-                              <ul class="cc-bstree-branch collapse" id="children_2">
-                                <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                                <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                                <li class="bstree-closed" data-reload="true" data-loaded="false" data-href="Bootstrap-Tree/example/jsonexample.json" data-value="45">
-                                    <span class="node-text">This is my third leaf</span>
+                        <li>
+                          <a href="#children_1" data-toggle="collapse" class="node-text" aria-expanded="true" aria-controls="children_1"><i class="bstree-icon fa fa-fw fa-chevron-down"></i>This is my text</a>
+                          <ul class="collapse in" id="children_1">
+                            <li><span class="node-text">This is my first leaf</span></li>
+                            <li>
+                              <a class="node-text" data-toggle="collapse" href="#children_2" aria-expanded="false" aria-controls="children_2"><i class="bstree-icon fa fa-fw fa-chevron-right"></i>This is my second leaf</a>
+                              <ul class="collapse" id="children_2">
+                                <li><span class="node-text">This is my first leaf</span></li>
+                                <li><span class="node-text">This is my second leaf</span></li>
+                                <li>
+                                    <a class="node-text" href="#remote_children_1" data-toggle="collapse" aria-expanded="false" aria-controls="remote_children_1"><i class="bstree-icon fa fa-fw fa-chevron-right"></i>This is my third leaf</a>
+                                    <ul class="collapse" id="remote_children_1" data-reload="true" data-loaded="false" data-href="jsonexample.json"></ul>
                                 </li>
                               </ul>
                             </li>
-                            <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
+                            <li><span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
-                        <li class="bstree-closed">
-                          <a href="#children_4" data-toggle="collapse" class="node-text">This is my next branch</a>
-                          <ul class="cc-bstree-branch collapse" id="children_4">
-                            <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                            <li class="bstree-closed" data-reload="false" data-loaded="false" data-href="jsonexample.json" data-value="55">
+                        <li>
+                          <a href="#children_4" data-toggle="collapse" class="node-text" aria-expanded="false" aria-controls="children_4"><i class="bstree-icon fa fa-fw fa-chevron-right"></i>This is my next branch</a>
+                          <ul class="collapse" id="children_4">
+                            <li><span class="node-text">This is my first leaf</span></li>
+                            <li><span class="node-text">This is my second leaf</span></li>
+                            <li data-reload="false" data-loaded="false" data-href="jsonexample.json" data-value="55">
                                 <span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
@@ -76,27 +78,27 @@
                     <p></p>
                     <div class="bstree" data-foldertree="true">
                       <ul>
-                        <li class="bstree-open">
-                            <a href="#children_5" data-toggle="collapse" class="node-text">This is my text</a>
-                          <ul class="cc-bstree-branch collapse in" id="children_5">
-                            <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-closed">
-                              <a href="#children_6" data-toggle="collapse" class="node-text">This is my second leaf</a>
-                              <ul class="cc-bstree-branch collapse" id="children_6">
-                                <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                                <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                                <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
+                        <li>
+                            <a href="#children_5" data-toggle="collapse" class="node-text" aria-expanded="true" aria-controls="children_5"><i class="bstree-icon fa fa-fw fa-folder-open"></i>This is my text</a>
+                          <ul class="collapse in" id="children_5">
+                            <li><span class="node-text">This is my first leaf</span></li>
+                            <li>
+                              <a href="#children_6" data-toggle="collapse" class="node-text" aria-expanded="false" aria-controls="children_6"><i class="bstree-icon fa fa-fw fa-folder"></i>This is my second leaf</a>
+                              <ul class="collapse" id="children_6">
+                                <li><span class="node-text">This is my first leaf</span></li>
+                                <li><span class="node-text">This is my second leaf</span></li>
+                                <li><span class="node-text">This is my third leaf</span></li>
                               </ul>
                             </li>
-                            <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
+                            <li><span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
-                        <li class="bstree-closed bstree-last">
-                          <a href="#children_7" data-toggle="collapse" class="node-text">This is my next branch</a>
-                          <ul class="cc-bstree-branch collapse" id="children_7">
-                            <li class="bstree-leaf"><span class="node-text">This is my first leaf</span></li>
-                            <li class="bstree-leaf"><span class="node-text">This is my second leaf</span></li>
-                            <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
+                        <li>
+                          <a href="#children_7" data-toggle="collapse" class="node-text" aria-expanded="false" aria-controls="children_7"><i class="bstree-icon fa fa-fw fa-folder"></i>This is my next branch</a>
+                          <ul class="collapse" id="children_7">
+                            <li><span class="node-text">This is my first leaf</span></li>
+                            <li><span class="node-text">This is my second leaf</span></li>
+                            <li><span class="node-text">This is my third leaf</span></li>
                           </ul>
                         </li>
                       </ul>
@@ -104,27 +106,78 @@
                     <p></p>
                     <div class="bstree bstree-box" data-checkbox="checkfield">
                       <ul>
-                        <li class="bstree-open bstree-root-header">
-                          <span class="node-text">This Is My Header</span>
-                          <ul>
-                            <li class="bstree-open" data-checked="false" data-value="25"><span class="node-text">This is my text</span>
-                              <ul>
-                                <li class="bstree-leaf" data-checked="true" data-value="26" data-checkbox="otherfield"><span class="node-text">This is my first leaf</span></li>
-                                <li class="bstree-closed" data-checked="false" data-value="27"><span class="node-text">This is my second leaf</span>
-                                  <ul>
-                                    <li class="bstree-leaf" data-checked="false" data-value="28"><span class="node-text">This is my first leaf</span></li>
-                                    <li class="bstree-leaf" data-checked="true" data-value="29"><span class="node-text">This is my second leaf</span></li>
-                                    <li class="bstree-closed" data-reload="true" data-loaded="false" data-href="jsonexample.json" data-value="45"><span class="node-text">This is my third leaf</span></li>
+                        <li class="bstree-root-header">
+                          <a href="#children_8" data-toggle="collapse" class="node-text" aria-expanded="true" aria-controls="children_8"><i class="bstree-icon fa fa-fw fa-chevron-right"></i>This Is My Header</a>
+                          <ul class="collapse in" id="children_8">
+                            <li>
+                                <span class="node-text">
+                                    <a href="#children_9" class="toggle-link" data-toggle="collapse" aria-expanded="true" aria-controls="children_9"><i class="bstree-icon fa fa-fw fa-chevron-down"></i></a>
+                                    <a href="#check_1" class="bstree-check-all"><input type="checkbox" id="check_1"> This is my text</a>
+                                </span>
+                              <ul class="collapse in" id="children_9">
+                                <li>
+                                    <span class="node-text">
+                                        <a href="#check_2" class="bstree-check"><input type="checkbox" checked name="otherfield" id="check_2" value="26"> This is my first leaf</a>
+                                    </span>
+                                </li>
+                                <li data-checked="false" data-value="27">
+                                    <span class="node-text">
+                                        <!-- data-checked="false" data-value="25" -->
+                                        <a href="#children_10" class="toggle-link" data-toggle="collapse" aria-expanded="true" aria-controls="children_10"><i class="bstree-icon fa fa-fw fa-chevron-down"></i></a>
+                                        <a href="#check_3" class="bstree-check-all"><input type="checkbox" id="check_3"> This is my second leaf</a>
+                                    </span>
+                                  <ul class="collapse in" id="children_10">
+                                    <li>
+                                        <span class="node-text">
+                                            <a href="#check_4" class="bstree-check"><input type="checkbox" checked name="checkfield" id="check_4" value="28"> This is my first leaf</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="node-text">
+                                            <a href="#check_5" class="bstree-check"><input type="checkbox" name="checkfield" id="check_5" value="29"> This is my second leaf</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="node-text">
+                                            <a href="#children_11" class="toggle-link" data-toggle="collapse" aria-expanded="false" aria-controls="children_11"><i class="bstree-icon fa fa-fw fa-chevron-right"></i></a>
+                                            <a href="#check_6" class="bstree-check-all"><input type="checkbox" id="check_6"> This is my third leaf</a>
+                                        </span>
+                                        <ul class="collapse" id="children_11" data-reload="true" data-loaded="false" data-href="jsonexample.json" data-value="45"></ul>
+                                    </li>
                                   </ul>
                                 </li>
-                                <li class="bstree-leaf"><span class="node-text">This is my third leaf</span></li>
+                                <li>
+                                    <span class="node-text">
+                                        <a href="#check_7" class="bstree-check"><input type="checkbox" name="checkfield" id="check_7" value="31"> This is my third leaf</a>
+                                    </span>
+                                </li>
                               </ul>
                             </li>
-                            <li class="bstree-closed" data-remote="false" data-type="json" data-nodeid="12" data-checked="false" data-value="32"><span class="node-text">This is my next branch</span>
-                              <ul>
-                                <li class="bstree-leaf" data-checked="false" data-value="33"><span class="node-text">This is my first leaf</span></li>
-                                <li class="bstree-leaf" data-checked="false" data-value="34"><span class="node-text">This is my second leaf</span></li>
-                                <li class="bstree-closed" data-checked="true" data-reload="true" data-loaded="false" data-href="jsonexample.json" data-value="55"><span class="node-text">This is my third leaf</span></li>
+                            <li>
+                                <span class="node-text">
+                                    <!--  data-remote="false" data-type="json" data-nodeid="12" data-checked="false" data-value="32" -->
+                                    <a href="#children_12" class="toggle-link" data-toggle="collapse" aria-expanded="true" aria-controls="children_12"><i class="bstree-icon fa fa-fw fa-chevron-down"></i></a>
+                                    <a href="#check_8" class="bstree-check-all"><input type="checkbox" id="check_8"> This is my my next branch</a>
+                                </span>
+                              <ul class="collapse in" id="children_12">
+                                <li>
+                                    <span class="node-text">
+                                        <a href="#check_9" class="bstree-check"><input type="checkbox" name="checkfield" id="check_9" value="33"> This is my first leaf</a>
+                                    </span>
+                                </li>
+                                <li data-checked="false" data-value="34">
+                                    <span class="node-text">
+                                        <a href="#check_10" class="bstree-check"><input type="checkbox" name="checkfield" id="check_10" value="34"> This is my second leaf</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <!-- data-checked="true" -->
+                                    <span class="node-text">
+                                        <a href="#children_13" class="toggle-link" data-toggle="collapse" aria-expanded="false" aria-controls="children_13"><i class="bstree-icon fa fa-fw fa-chevron-right"></i></a>
+                                        <a href="#check_11" class="bstree-check-all"><input type="checkbox" id="check_11"> This is my third leaf</a>
+                                    </span>
+                                    <ul class="collapse" id="children_13" data-reload="true" data-loaded="false" data-href="jsonexample.json" data-value="55"></ul>
+                                </li>
                               </ul>
                             </li>
                           </ul>

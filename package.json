@@ -36,6 +36,7 @@
     "eslint": "^4.15.0",
     "eslint-loader": "^1.9.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "font-awesome": "4.7.0",
     "jasmine": "^2.8.0",
     "jasmine-es6": "^0.4.3",
     "jquery": "3.2.1",

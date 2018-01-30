@@ -57,6 +57,11 @@ const Event = {
 
 const ClassName = {
     TREE_ICON: `${NAME}-icon`,
+    NODE_TEXT: 'node-text',
+    TOGGLE_EXPAND: 'fa-chevron-right',
+    TOGGLE_COLLAPSE: 'fa-chevron-down',
+    TREE_LOADING: 'fa-spinner fa-spin',
+
     TREE_NOICON: `${NAME}-noicon`,
     TREE_LEAF: `${NAME}-leaf`,
     TREE_BRANCH: `${NAME}-branch`,
@@ -68,13 +73,10 @@ const ClassName = {
     TREE_CLOSED: `${NAME}-closed`,
     TREE_CHECKBOX: `${NAME}-checkbox`,
     TREE_CHECKED: `${NAME}-checked`,
-    TREE_LOADING: `${NAME}-loading`,
-    TREE_HOVERED: `${NAME}-hovered`,
     TREE_UNCHECKED: `${NAME}-unchecked`,
     TREE_UNDETERMINED: `${NAME}-undetermined`,
-    TOGGLE_RIGHT: 'glyphicon-chevron-right',
-    TOGGLE_DOWN: 'glyphicon-chevron-down',
-    NODE_TEXT: 'node-text'
+    TOGGLE_RIGHT: 'fa-chevron-right',
+    TOGGLE_DOWN: 'fa-chevron-down'
 };
 
 /*const Selector = {
